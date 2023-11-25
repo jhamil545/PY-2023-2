@@ -153,12 +153,12 @@ class _GanadoUIState extends State<GanadoUI> {
     );
   }
 
-  Widget _buildListView(BuildContext context, List<GanadoModelox> ganado) {
+  Widget _buildListView(BuildContext context, List<GanadoxModelo> ganado) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          GanadoModelox ganadox = ganado[index];
+          GanadoxModelo ganadox = ganado[index];
           return Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Card(
@@ -174,6 +174,13 @@ class _GanadoUIState extends State<GanadoUI> {
                             Text(ganadox.nombre,
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
+                        ),
+                        subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[]),
+                        leading: CircleAvatar(
+                          backgroundImage:
+                          AssetImage("assets/imagen/man-icon.png"),
                         ),
                         trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -195,7 +202,7 @@ class _GanadoUIState extends State<GanadoUI> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       CompanyFormEdit(
-                                                          modelA: ganadox)),
+                                                          modelA: ganadox as GanadoModelo)),
                                             ).then(onGoBack);
                                           })),
                                   Expanded(
@@ -243,7 +250,7 @@ class _GanadoUIState extends State<GanadoUI> {
                                                 BlocProvider.of<GanadoBloc>(
                                                     context)
                                                     .add(DeleteGanadoEvent(
-                                                    ganadox.id));
+                                                    ganadox as GanadoModelo));
 
 
                                               }

@@ -21,7 +21,7 @@ class _GanadoFormState extends State<GanadoForm> {
   late String fechanac = "";
   late String foto_url = "";
   late String genero = "";
-  late int razaId ;
+  late int razaId;
   List<Map<String, String>> generos = [
     {'value': 'H', 'display': 'Hembra'},
     {'value': 'M', 'display': 'Macho'}
@@ -64,7 +64,7 @@ class _GanadoFormState extends State<GanadoForm> {
   }
 
   void capturaRaza(valor) {
-    razaId = valor;
+    razaId = 42;
   }
 
   @override
@@ -113,13 +113,13 @@ class _GanadoFormState extends State<GanadoForm> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                GanadoModelo mp = GanadoModelo.unlaunched();
+                                GanadoxModelo mp = GanadoxModelo.unlaunched();
                                 mp.arete = arete;
                                 mp.nombre = nombre;
                                 mp.fechanac = DateFormat('yyyy-MM-dd').format(DateTime.parse(_fechanac.value.text)); ;
                                 mp.foto_url = foto_url;
                                 mp.genero = genero;
-                                mp.razaId = razaId;
+                                mp.razaId.id = razaId;
                                 print("NA:$arete"
                                     "F:$nombre HI:${_fechanac.text} "
                                     "La: $foto_url, Lo:$genero "

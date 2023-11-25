@@ -8,13 +8,11 @@ class GanadoInitialState extends GanadoState {}
 class GanadoLoadingState extends GanadoState {}
 
 class GanadoLoadedState extends GanadoState {
-  List<GanadoModelox> ganadoList;
-
+  List<GanadoxModelo> ganadoList;
   GanadoLoadedState(this.ganadoList);
 }
 
 class GanadoError extends GanadoState {
   Error e;
-
   GanadoError(this.e);
 }

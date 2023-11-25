@@ -10,45 +10,50 @@ part 'ganado_event.dart';
 part 'ganado_state.dart';
 
 class GanadoBloc extends Bloc<GanadoEvent, GanadoState> {
-  late final GanadoRepository _ganadoRepository;
-
-  GanadoBloc(this._ganadoRepository) : super(GanadoInitialState()) {
+  late final GanadoRepository ganadoRepository;
+  GanadoBloc(this.ganadoRepository) : super(GanadoInitialState()) {
     on<GanadoEvent>((event, emit) async {
-      // TODO: implement event handler
       print("Bloc x");
       if (event is ListarGanadoEvent) {
         emit(GanadoLoadingState());
         try {
           print("pasox!!");
-          List<GanadoModelox> PersonaList = await _ganadoRepository.getGanado();
-          emit(GanadoLoadedState(PersonaList));
+          List<GanadoxModelo> ganadoList =
+          await ganadoRepository.getGanado();
+          emit(GanadoLoadedState(ganadoList));
         } catch (e) {
           emit(GanadoError(e as Error));
         }
       } else if (event is DeleteGanadoEvent) {
         try {
-          await _ganadoRepository.deleteGanado(event.ganado);
+          await ganadoRepository.deleteGanado(event.ganado!.id);
+
           emit(GanadoLoadingState());
-          List<GanadoModelox> PersonaList = await _ganadoRepository.getGanado();
-          emit(GanadoLoadedState(PersonaList));
+          print("llegaccc");
+          List<GanadoxModelo> ganadoList = await ganadoRepository.getGanado();
+          print("no pasasdd");
+          emit(GanadoLoadedState(ganadoList));
         } catch (e) {
           emit(GanadoError(e as Error));
         }
       } else if (event is CreateGanadoEvent) {
         try {
-          await _ganadoRepository.createGanado(event.ganado!);
+          await ganadoRepository.createGanado(event.ganado);
           emit(GanadoLoadingState());
-          List<GanadoModelox> PersonaList = await _ganadoRepository.getGanado();
-          emit(GanadoLoadedState(PersonaList));
+          List<GanadoxModelo> ganadoList =
+          await ganadoRepository.getGanado();
+          emit(GanadoLoadedState(ganadoList));
         } catch (e) {
           emit(GanadoError(e as Error));
         }
       } else if (event is UpdateGanadoEvent) {
         try {
-          await _ganadoRepository.updateGanado(event.ganado!.id, event.ganado!);
+          await ganadoRepository.updateGanado(
+              event.ganado.id, event.ganado);
           emit(GanadoLoadingState());
-          List<GanadoModelox> PersonaList = await _ganadoRepository.getGanado();
-          emit(GanadoLoadedState(PersonaList));
+          List<GanadoxModelo> ganadoList =
+          await ganadoRepository.getGanado();
+          emit(GanadoLoadedState(ganadoList));
         } catch (e) {
           emit(GanadoError(e as Error));
         }

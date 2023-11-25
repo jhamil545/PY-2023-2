@@ -13,7 +13,7 @@ class _GanadoApi implements GanadoApi {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://10.80.98.63:8080';
+    baseUrl ??= 'http://192.168.1.34:8080';
   }
 
   final Dio _dio;
@@ -21,14 +21,14 @@ class _GanadoApi implements GanadoApi {
   String? baseUrl;
 
   @override
-  Future<List<GanadoModelox>> getGanado(String token) async {
+  Future<List<GanadoxModelo>> getGanado(String token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<GanadoModelox>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<GanadoxModelo>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -41,7 +41,7 @@ class _GanadoApi implements GanadoApi {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => GanadoModelox.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => GanadoxModelo.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
@@ -49,7 +49,7 @@ class _GanadoApi implements GanadoApi {
   @override
   Future<GanadoModelo> createGanado(
     String token,
-    GanadoModelo ganado,
+    GanadoxModelo ganado,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -66,6 +66,33 @@ class _GanadoApi implements GanadoApi {
             .compose(
               _dio.options,
               '/finca/ganado/crear',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GanadoModelo.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GanadoModelo> findGanado(
+    String token,
+    int id,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GanadoModelo>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/finca/ganado/buscar/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -105,7 +132,7 @@ class _GanadoApi implements GanadoApi {
   Future<GanadoModelo> updateGanado(
     String token,
     int id,
-    GanadoModelo ganado,
+    GanadoxModelo ganado,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -115,7 +142,7 @@ class _GanadoApi implements GanadoApi {
     _data.addAll(ganado.toJson());
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<GanadoModelo>(Options(
-      method: 'PATCH',
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )

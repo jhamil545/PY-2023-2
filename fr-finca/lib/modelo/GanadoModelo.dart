@@ -48,8 +48,8 @@ class GanadoModelo {
   }
 }
 
-class GanadoModelox {
-  GanadoModelox({
+class GanadoxModelo {
+  GanadoxModelo({
     required this.id,
     required this.arete,
     required this.nombre,
@@ -58,7 +58,7 @@ class GanadoModelox {
     required this.genero,
     required this.razaId,
   });
-  GanadoModelox.unlaunched();
+  GanadoxModelo.unlaunched();
   late  int id = 0;
   late final String arete;
   late final String nombre;
@@ -67,7 +67,7 @@ class GanadoModelox {
   late final String genero;
   late final RazaModelo razaId;
 
-  GanadoModelox.fromJson(Map<String, dynamic> json){
+  GanadoxModelo.fromJson(Map<String, dynamic> json){
     id = json['id'];
     arete = json['arete'];
     nombre = json['nombre'];

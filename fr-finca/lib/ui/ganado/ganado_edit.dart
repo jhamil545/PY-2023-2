@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CompanyFormEdit extends StatefulWidget {
-  GanadoModelox modelA;
+  GanadoModelo modelA;
 
   CompanyFormEdit({super.key, required this.modelA});
 
@@ -15,7 +15,7 @@ class CompanyFormEdit extends StatefulWidget {
 }
 
 class GanadoFormEditState extends State<CompanyFormEdit> {
-  GanadoModelox modelA;
+  GanadoModelo modelA;
   GanadoFormEditState({required this.modelA}) : super();
 
   late String arete = "";
@@ -106,13 +106,13 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                GanadoModelo mp = GanadoModelo.unlaunched();
+                                GanadoxModelo mp = GanadoxModelo.unlaunched();
                                 mp.arete = arete;
                                 mp.nombre = nombre;
                                 mp.fechanac = fechanac;
                                 mp.foto_url = foto_url;
                                 mp.genero = genero;
-                                mp.razaId = modelA.razaId.id;
+                                mp.razaId.id = modelA.razaId;
                                 mp.id = modelA.id;
 
                                 /*var api = await Provider.of<GanadoApi>(

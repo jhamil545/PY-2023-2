@@ -50,20 +50,31 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Container(
-        color: Colors.white,
+        color: Colors.indigoAccent,
         child: Center(
           child: SingleChildScrollView(
             child: Column(
+
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
+
               children: <Widget>[
+                Text(
+                  'BIENBENIDO A MILKMINDER',
+                  style:TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 30,
+                  ),
+                ),
                 Image(
-                    image: AssetImage("assets/imagen/logo_upeu.png"),
+                    image: AssetImage("assets/imagen/vaca.png"),
                     height: 180.0),
                 SizedBox(height: 20),
                 _buildForm(),
                 SizedBox(height: 20),
+
                 /*checkbox(
                     title: "Fire:",
                     initValue: modLocal,
@@ -237,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: const Text(
                       'dismiss',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.indigo),
                     ),
                   )
                 ],

@@ -4,31 +4,26 @@ part of 'ganado_bloc.dart';
 abstract class GanadoEvent {}
 
 class ListarGanadoEvent extends GanadoEvent {
-  ListarRazaEvent() {
+  ListarGanadoEvent() {
     print("Evento si");
   }
-//ListarRazaEvent({required RazaModelo raza}):super(raza:raza);
+//ListarEmpresaEvent({required EmpresaModelo Empresa}):super(Empresa:Empresa);
 }
 
 class DeleteGanadoEvent extends GanadoEvent {
-  int ganado;
-
+  GanadoModelo ganado;
   DeleteGanadoEvent(this.ganado);
-//DeleteRazaEvent({required RazaModelo raza}):super(raza:raza);
+//DeleteEmpresaEvent({required EmpresaModelo Empresa}):super(Empresa:Empresa);
 }
 
 class UpdateGanadoEvent extends GanadoEvent {
-
-
-
-GanadoModelo ganado;
-UpdateGanadoEvent(this.ganado);
-//UpdateRazaEvent({required RazaModelo raza}):super(raza:raza);
+  GanadoxModelo ganado;
+  UpdateGanadoEvent(this.ganado);
+//UpdateEmpresaEvent({required EmpresaModelo Empresa}):super(Empresa:Empresa);
 }
 
 class CreateGanadoEvent extends GanadoEvent {
-
-  GanadoModelo ganado;
+  GanadoxModelo ganado;
   CreateGanadoEvent(this.ganado);
-//CreateRazaEvent({required RazaModelo raza}):super(raza:raza);
+//CreateEmpresaEvent({required EmpresaModelo Empresa}):super(Empresa:Empresa);
 }
