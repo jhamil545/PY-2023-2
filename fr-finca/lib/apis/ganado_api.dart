@@ -21,8 +21,8 @@ abstract class GanadoApi {
   Future<List<GanadoxModelo>> getGanado(@Header("Authorization") String token);
 
   @POST("/finca/ganado/crear")
-  Future<GanadoModelo> createGanado(@Header("Authorization") String
-  token,@Body() GanadoxModelo ganado);
+  Future<GanadoxModelo> createGanado(@Header("Authorization") String
+  token,@Body() GanadoModelo ganado);
 
   @GET("/finca/ganado/buscar/{id}")
   Future<GanadoModelo> findGanado(@Header("Authorization") String token, @Path("id") int id);
@@ -32,7 +32,7 @@ abstract class GanadoApi {
       @Path("id") int id);
 
   @PUT("/finca/ganado/editar/{id}")
-  Future<GanadoModelo> updateGanado(@Header("Authorization") String token,
-      @Path("id") int id , @Body() GanadoxModelo ganado);
+  Future<GanadoxModelo> updateGanado(@Header("Authorization") String token,
+      @Path("id") int id , @Body() GanadoModelo ganado);
 
 }

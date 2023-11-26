@@ -64,7 +64,7 @@ class _GanadoFormState extends State<GanadoForm> {
   }
 
   void capturaRaza(valor) {
-    razaId = 42;
+    razaId = valor;
   }
 
   @override
@@ -113,17 +113,14 @@ class _GanadoFormState extends State<GanadoForm> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                GanadoxModelo mp = GanadoxModelo.unlaunched();
+                                GanadoModelo mp = GanadoModelo.unlaunched();
                                 mp.arete = arete;
                                 mp.nombre = nombre;
-                                mp.fechanac = DateFormat('yyyy-MM-dd').format(DateTime.parse(_fechanac.value.text)); ;
-                                mp.foto_url = foto_url;
+                                mp.fechaNac = DateFormat('yyyy-MM-dd').format(DateTime.parse(_fechanac.value.text));
+                                mp.fotoUrl = foto_url;
                                 mp.genero = genero;
-                                mp.razaId.id = razaId;
-                                print("NA:$arete"
-                                    "F:$nombre HI:${_fechanac.text} "
-                                    "La: $foto_url, Lo:$genero "
-                                    "EV:$razaId");
+                                mp.razaId = razaId;
+
                                 BlocProvider.of<GanadoBloc>(context)
                                     .add(CreateGanadoEvent(mp));
                                 Navigator.pop(context, () {

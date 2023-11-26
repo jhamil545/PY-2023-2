@@ -47,9 +47,9 @@ class _GanadoApi implements GanadoApi {
   }
 
   @override
-  Future<GanadoModelo> createGanado(
+  Future<GanadoxModelo> createGanado(
     String token,
-    GanadoxModelo ganado,
+    GanadoModelo ganado,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -58,7 +58,7 @@ class _GanadoApi implements GanadoApi {
     final _data = <String, dynamic>{};
     _data.addAll(ganado.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GanadoModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<GanadoxModelo>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -70,7 +70,7 @@ class _GanadoApi implements GanadoApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GanadoModelo.fromJson(_result.data!);
+    final value = GanadoxModelo.fromJson(_result.data!);
     return value;
   }
 
@@ -129,10 +129,10 @@ class _GanadoApi implements GanadoApi {
   }
 
   @override
-  Future<GanadoModelo> updateGanado(
+  Future<GanadoxModelo> updateGanado(
     String token,
     int id,
-    GanadoxModelo ganado,
+    GanadoModelo ganado,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -141,7 +141,7 @@ class _GanadoApi implements GanadoApi {
     final _data = <String, dynamic>{};
     _data.addAll(ganado.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GanadoModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<GanadoxModelo>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -153,7 +153,7 @@ class _GanadoApi implements GanadoApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GanadoModelo.fromJson(_result.data!);
+    final value = GanadoxModelo.fromJson(_result.data!);
     return value;
   }
 

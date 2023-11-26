@@ -202,7 +202,7 @@ class _GanadoUIState extends State<GanadoUI> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       CompanyFormEdit(
-                                                          modelA: ganadox as GanadoModelo)),
+                                                          modelA: ganadox )),
                                             ).then(onGoBack);
                                           })),
                                   Expanded(
@@ -250,7 +250,7 @@ class _GanadoUIState extends State<GanadoUI> {
                                                 BlocProvider.of<GanadoBloc>(
                                                     context)
                                                     .add(DeleteGanadoEvent(
-                                                    ganadox as GanadoModelo));
+                                                    ganadox.id ));
 
 
                                               }

@@ -26,7 +26,7 @@ class GanadoBloc extends Bloc<GanadoEvent, GanadoState> {
         }
       } else if (event is DeleteGanadoEvent) {
         try {
-          await ganadoRepository.deleteGanado(event.ganado!.id);
+          await ganadoRepository.deleteGanado(event.ganado!);
 
           emit(GanadoLoadingState());
           print("llegaccc");
@@ -39,12 +39,16 @@ class GanadoBloc extends Bloc<GanadoEvent, GanadoState> {
       } else if (event is CreateGanadoEvent) {
         try {
           await ganadoRepository.createGanado(event.ganado);
+          print("x aquiii");
           emit(GanadoLoadingState());
+          print("x aquiii");
           List<GanadoxModelo> ganadoList =
           await ganadoRepository.getGanado();
+
           emit(GanadoLoadedState(ganadoList));
         } catch (e) {
           emit(GanadoError(e as Error));
+
         }
       } else if (event is UpdateGanadoEvent) {
         try {
