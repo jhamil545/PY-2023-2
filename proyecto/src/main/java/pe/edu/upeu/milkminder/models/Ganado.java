@@ -43,17 +43,17 @@ public class Ganado {
     @Basic(optional = false)
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
-    private LocalDate fechanac;
+    private LocalDate fechaNac;
 
     @Column(name = "foto_url", nullable = false)
-    private String foto_url;
+    private String fotoUrl;
 
     @Column(name = "genero", nullable = false)
     private String genero;
 
     @JoinColumn(name = "raza_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnoreProperties({"ganados", "", "", ""})
+    @JsonIgnoreProperties({"ganado", "", "", ""})
     private Raza razaId;  
     
 }

@@ -18,12 +18,12 @@ public class GanadoDto {
   String arete;
   String nombre; 
   @JsonFormat(pattern = "yyyy-MM-dd")
-  LocalDate fechanac;  
+  LocalDate fechaNac;  
   String genero;
-  String foto_url;
+  String fotoUrl;
   @JsonIgnoreProperties({"ganado"})
   Raza razaId; 
   
-  public record GanadoCrearDto(Long id,String arete,String nombre,LocalDate fechanac,
-        String genero,String foto_url,  Long razaId){}
+  public record GanadoCrearDto(Long id,String arete,String nombre,LocalDate fechaNac,
+        String genero,String fotoUrl,  Long razaId){}
 }

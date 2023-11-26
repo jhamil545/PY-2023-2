@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CompanyFormEdit extends StatefulWidget {
-  GanadoModelo modelA;
+  GanadoxModelo modelA;
 
   CompanyFormEdit({super.key, required this.modelA});
 
@@ -15,7 +15,7 @@ class CompanyFormEdit extends StatefulWidget {
 }
 
 class GanadoFormEditState extends State<CompanyFormEdit> {
-  GanadoModelo modelA;
+  GanadoxModelo modelA;
   GanadoFormEditState({required this.modelA}) : super();
 
   late String arete = "";
@@ -83,8 +83,8 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                     _buildDatoCadena(capturaNombre, modelA.nombre,
                         "Nombre :"),
                     _buildDatoCadena(
-                        capturaFechanac, modelA.fechanac, "fechanac:"),
-                    _buildDatoCadena(capturaFoto_url, modelA.foto_url, "foto_url:"),
+                        capturaFechanac, modelA.fechaNac, "fechanac:"),
+                    _buildDatoCadena(capturaFoto_url, modelA.fotoUrl, "foto_url:"),
                     _buildDatoCadena(capturaGenero, modelA.genero, "genero:"),
                     //_buildDatoCadena(capturaRaza, modelA.userId as String, "Usuario:"),
                     Padding(
@@ -106,13 +106,13 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                GanadoxModelo mp = GanadoxModelo.unlaunched();
+                                GanadoModelo mp = GanadoModelo.unlaunched();
                                 mp.arete = arete;
                                 mp.nombre = nombre;
-                                mp.fechanac = fechanac;
-                                mp.foto_url = foto_url;
+                                mp.fechaNac = fechanac;
+                                mp.fotoUrl = foto_url;
                                 mp.genero = genero;
-                                mp.razaId.id = modelA.razaId;
+                                mp.razaId= modelA.razaId.id;
                                 mp.id = modelA.id;
 
                                 /*var api = await Provider.of<GanadoApi>(

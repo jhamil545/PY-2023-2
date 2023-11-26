@@ -7,8 +7,8 @@ class GanadoModelo {
   late int id=0;
   late final String arete;
   late final String nombre;
-  late final String fechanac;
-  late final String foto_url;
+  late final String fechaNac;
+  late final String fotoUrl;
   late final String genero;
   late final int razaId;
 
@@ -16,8 +16,8 @@ class GanadoModelo {
     required this.id,
     required this.arete,
     required this.nombre,
-    required this.fechanac,
-    required this.foto_url,
+    required this.fechaNac,
+    required this.fotoUrl,
     required this.genero,
     required this.razaId,
   });
@@ -27,8 +27,8 @@ class GanadoModelo {
     id = json['id'];
     arete = json['arete'];
     nombre = json['nombre'];
-    fechanac = json['fechanac'];
-    foto_url = json['foto_url'];
+    fechaNac = json['fechaNac'];
+    fotoUrl = json['fotoUrl'];
     genero = json['genero'];
 
     razaId = json['razaId'];
@@ -39,8 +39,8 @@ class GanadoModelo {
     _data['id'] = id;
     _data['arete'] = arete;
     _data['nombre'] = nombre;
-    _data['fechanac'] = fechanac;
-    _data['foto_url'] = foto_url;
+    _data['fechaNac'] = fechaNac;
+    _data['fotoUrl'] = fotoUrl;
     _data['genero'] = genero;
     _data['razaId'] = razaId;
 
@@ -53,8 +53,8 @@ class GanadoxModelo {
     required this.id,
     required this.arete,
     required this.nombre,
-    required this.fechanac,
-    required this.foto_url,
+    required this.fechaNac,
+    required this.fotoUrl,
     required this.genero,
     required this.razaId,
   });
@@ -62,8 +62,8 @@ class GanadoxModelo {
   late  int id = 0;
   late final String arete;
   late final String nombre;
-  late final String fechanac;
-  late final String foto_url;
+  late final String fechaNac;
+  late final String fotoUrl;
   late final String genero;
   late final RazaModelo razaId;
 
@@ -71,8 +71,8 @@ class GanadoxModelo {
     id = json['id'];
     arete = json['arete'];
     nombre = json['nombre'];
-    fechanac = json['fechanac'];
-    foto_url = json['foto_url'];
+    fechaNac = json['fechaNac'];
+    fotoUrl = json['fotoUrl'];
     genero = json['genero'];
     razaId = RazaModelo.fromJson(json['razaId']);
   }
@@ -82,8 +82,8 @@ class GanadoxModelo {
     _data['id'] = id;
     _data['arete'] = arete;
     _data['nombre'] = nombre;
-    _data['fechanac'] = fechanac;
-    _data['foto_url'] = foto_url;
+    _data['fechaNac'] = fechaNac;
+    _data['fotoUrl'] = fotoUrl;
     _data['genero'] = genero;
     _data['razaId'] = razaId.toJson();
     return _data;

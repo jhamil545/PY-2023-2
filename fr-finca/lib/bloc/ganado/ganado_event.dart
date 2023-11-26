@@ -11,19 +11,19 @@ class ListarGanadoEvent extends GanadoEvent {
 }
 
 class DeleteGanadoEvent extends GanadoEvent {
-  GanadoModelo ganado;
+  int ganado;
   DeleteGanadoEvent(this.ganado);
 //DeleteEmpresaEvent({required EmpresaModelo Empresa}):super(Empresa:Empresa);
 }
 
 class UpdateGanadoEvent extends GanadoEvent {
-  GanadoxModelo ganado;
+  GanadoModelo ganado;
   UpdateGanadoEvent(this.ganado);
 //UpdateEmpresaEvent({required EmpresaModelo Empresa}):super(Empresa:Empresa);
 }
 
 class CreateGanadoEvent extends GanadoEvent {
-  GanadoxModelo ganado;
+  GanadoModelo ganado;
   CreateGanadoEvent(this.ganado);
 //CreateEmpresaEvent({required EmpresaModelo Empresa}):super(Empresa:Empresa);
 }

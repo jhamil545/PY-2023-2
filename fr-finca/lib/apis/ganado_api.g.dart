@@ -49,7 +49,7 @@ class _GanadoApi implements GanadoApi {
   @override
   Future<GanadoModelo> createGanado(
     String token,
-    GanadoxModelo ganado,
+    GanadoModelo ganado,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -132,7 +132,7 @@ class _GanadoApi implements GanadoApi {
   Future<GanadoModelo> updateGanado(
     String token,
     int id,
-    GanadoxModelo ganado,
+    GanadoModelo ganado,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
