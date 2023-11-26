@@ -24,10 +24,16 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
   late String foto_url = "";
   late String genero = "";
   late int razaId = 0;
+  List<Map<String, String>> generos = [
+    {'value': 'H', 'display': 'Hembra'},
+    {'value': 'M', 'display': 'Macho'}
+  ];
 
   @override
   void initState() {
     super.initState();
+    print("ver: ${generos.map((item) => item['value']).toList()}");
+    print("verv: ${generos.map((item) => item['display']).toList()}");
   }
 
   final _formKey = GlobalKey<FormState>();

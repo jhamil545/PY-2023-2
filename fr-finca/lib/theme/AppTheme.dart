@@ -38,7 +38,7 @@ class AppTheme {
 
   static bool useMaterial3 = false;
   static bool useLightMode = true;
-  static int colorSelected = 1;
+  static int colorSelected = 0;
 
   static ThemeData themeData = ThemeData(
       colorSchemeSeed: AppTheme.colorOptions[AppTheme.colorSelected],

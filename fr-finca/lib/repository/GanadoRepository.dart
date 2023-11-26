@@ -24,11 +24,11 @@ class GanadoRepository {
     return await ganadoApi!.deleteGanado(TokenUtil.TOKEN, id);
   }
 
-  Future<GanadoModelo> updateGanado(int id, GanadoModelo ganado) async {
+  Future<GanadoxModelo> updateGanado(int id, GanadoModelo ganado) async {
     return await ganadoApi!.updateGanado(TokenUtil.TOKEN, id, ganado);
   }
 
-  Future<GanadoModelo> createGanado(GanadoModelo ganado) async {
+  Future<GanadoxModelo> createGanado(GanadoModelo ganado) async {
     //print(ganado.toJson());
     return await ganadoApi!.createGanado(TokenUtil.TOKEN, ganado);
   }
