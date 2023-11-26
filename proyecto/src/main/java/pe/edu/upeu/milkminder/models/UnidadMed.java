@@ -1,9 +1,13 @@
 package pe.edu.upeu.milkminder.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,12 +17,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 
-public class UnidadMed {
+public class Unidadmed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String unidad;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "caja_id")
+    private Caja caja;
 
     
 }

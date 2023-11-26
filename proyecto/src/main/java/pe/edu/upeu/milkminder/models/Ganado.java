@@ -1,11 +1,13 @@
 package pe.edu.upeu.milkminder.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -28,7 +31,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "ganado")
 public class Ganado {
- 
+
+    public enum Generotipo {//Insertar Manualmente en la tabla global_rol ambas opciones
+        MACHO, HEMBRA
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,12 +55,17 @@ public class Ganado {
     @Column(name = "foto_url", nullable = false)
     private String foto_url;
 
-    @Column(name = "genero", nullable = false, length = 1)
-    private String genero;
+    @Column(name = "genero", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Generotipo genero;
 
     @JoinColumn(name = "raza_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @JsonIgnoreProperties({"ganados", "", "", ""})
     private Raza razaId;  
+
+    @OneToMany(mappedBy = "ganado", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private List<Control> control;
     
 }
