@@ -12,6 +12,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,9 +33,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "ganado")
 public class Ganado {
 
-    public enum Generotipo {//Insertar Manualmente en la tabla global_rol ambas opciones
-        MACHO, HEMBRA
-    }
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,15 +55,14 @@ public class Ganado {
     private String foto_url;
 
     @Column(name = "genero", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Generotipo genero;
+    private String genero;
 
     @JoinColumn(name = "raza_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @JsonIgnoreProperties({"ganados", "", "", ""})
     private Raza razaId;  
 
-    @OneToMany(mappedBy = "ganado", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ganado", fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private List<Control> control;
     

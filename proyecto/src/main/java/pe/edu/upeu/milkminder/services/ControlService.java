@@ -1,18 +1,17 @@
 package pe.edu.upeu.milkminder.services;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-import pe.edu.upeu.milkminder.dtos.EmpresaDto;
 import pe.edu.upeu.milkminder.models.Control;
 
 public interface ControlService {
-    Control save(EmpresaDto.EmpresaCrearDto entidad);
+    public List<Control> listar();
 
-    List<Control> findAll();
+    public Control guardar(Control control);
 
-    Map<String, Boolean> delete(Long id);
+    public Control actualizar(Control control);
 
-    Control getControlById(Long id);
+    public Optional<Control> listarPorId(Long id);
 
-    Control update(EmpresaDto.EmpresaCrearDto entidad, Long id);     
+    public void eliminarPorId(Long id); 
 }

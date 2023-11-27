@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +26,12 @@ public class CajaDto {
     private Double cantidad;
     private Double precioUnitario;
     private Double subTotal;
+     @JsonIgnoreProperties({"caja"})
     private Long fincaId;
-    private List<Long> unidadesMedIds;
-    private List<Long> cuentasIds;
+    
+
+    public record CajaCrearDto(Long id,String movimiento,LocalDate fecha,String glosa,
+    Double cantidad,Double recioUnitario,Double subTotal,
+     Long fincaId){}
     
 }

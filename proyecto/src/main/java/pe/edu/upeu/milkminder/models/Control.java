@@ -71,6 +71,7 @@ public class Control {
     private String tratamiento;
 
     @Column(name = "servicio", nullable = false)
+     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @Enumerated(EnumType.STRING)
     private Serviciotipo servico;
 
