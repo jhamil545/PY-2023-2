@@ -8,13 +8,12 @@ import pe.edu.upeu.milkminder.dtos.UsuarioDto;
 import pe.edu.upeu.milkminder.models.Usuario;
 
 
-
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {
 
     UsuarioDto toUserDto(Usuario user);
 
     @Mapping(target = "password", ignore = true)
-    Usuario usuarioCrearDtoToUser(UsuarioCrearDto usuarioCrearDto);
+    Usuario usuarioCrearDtoToUser(UsuarioDto.UsuarioCrearDto usuarioCrearDto);
 
 }

@@ -14,7 +14,6 @@ import java.net.URI;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pe.edu.upeu.milkminder.configuration.UserAuthenticationProvider;
 import pe.edu.upeu.milkminder.dtos.CredencialesDto;
-import pe.edu.upeu.milkminder.dtos.UsuarioCrearDto;
 import pe.edu.upeu.milkminder.dtos.UsuarioDto;
 import pe.edu.upeu.milkminder.services.UsuarioService;
 
@@ -35,8 +34,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UsuarioDto> register(@RequestBody @Valid UsuarioCrearDto user) {
-        System.out.println("Passss...."+ user.token());
+    public ResponseEntity<UsuarioDto> register(@RequestBody @Valid UsuarioDto.UsuarioCrearDto user) {
+        System.out.println("Passss...." + user.token());
         UsuarioDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(createdUser));
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);

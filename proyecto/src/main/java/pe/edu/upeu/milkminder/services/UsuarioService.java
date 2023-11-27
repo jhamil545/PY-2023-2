@@ -1,76 +1,34 @@
 package pe.edu.upeu.milkminder.services;
 
+import java.util.List;
+import java.util.Map;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import pe.edu.upeu.milkminder.dtos.CredencialDto;
 
-import java.nio.CharBuffer;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+//import java.util.List;
+//import java.util.Map;
 
 import pe.edu.upeu.milkminder.dtos.CredencialesDto;
-import pe.edu.upeu.milkminder.dtos.UsuarioCrearDto;
 import pe.edu.upeu.milkminder.dtos.UsuarioDto;
-import pe.edu.upeu.milkminder.exceptions.AppException;
-import pe.edu.upeu.milkminder.mappers.UsuarioMapper;
-import pe.edu.upeu.milkminder.models.Rol;
 import pe.edu.upeu.milkminder.models.Usuario;
-import pe.edu.upeu.milkminder.repositories.UsuarioRepository;
 
-@RequiredArgsConstructor
-@Service
-public class UsuarioService {
+public interface UsuarioService {
 
-    private final UsuarioRepository userRepository;
-       
-    private final RolService rolService;    
+    UsuarioDto login(CredencialesDto credentialsDto);
 
-    private final PasswordEncoder passwordEncoder;
+    UsuarioDto loginByCorreo(CredencialDto correo);
 
-    private final UsuarioMapper userMapper;
+    UsuarioDto register(UsuarioDto.UsuarioCrearDto userDto);
 
-    public UsuarioDto login(CredencialesDto credentialsDto) {
-        Usuario user = userRepository.findByCorreo(credentialsDto.correo())
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+    List<Usuario> findAll();
 
-        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.password()), user.getPassword())) {
-            return userMapper.toUserDto(user);
-        }
-        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
-    }
+    Usuario getUsuarioById(Long id);
 
-    public UsuarioDto register(UsuarioCrearDto userDto) {
-        Optional<Usuario> optionalUser = userRepository.findByCorreo(userDto.correo());
+    String getContrasenaByCorreo(String correo);
 
-        if (optionalUser.isPresent()) {
-            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
-        }
+    Map<String, Boolean> delete(Long id);
 
-        Usuario user = userMapper.usuarioCrearDtoToUser(userDto);
-        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.password())));
-         System.out.println("Llego.................");
-         System.out.println(userDto.token());
-        
-         Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.getByRolNombre(Rol.RolNombre.ROLE_USER).get());
-        //if (userDto.roles().contains(Rol.RolNombre.ROLE_ADMIN))
-        if (userDto.token().equals("admin"))       
-            roles.add(rolService.getByRolNombre(Rol.RolNombre.ROLE_ADMIN).get());
-        user.setRoles(roles);
-        
-        
-        Usuario savedUser = userRepository.save(user);
+    UsuarioDto findByLogin(String correo);
 
-        return userMapper.toUserDto(savedUser);
-    }
-
-    public UsuarioDto findByLogin(String correo) {
-        Usuario user = userRepository.findByCorreo(correo)
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-        return userMapper.toUserDto(user);
-    }
-
+    Usuario update(UsuarioDto.UsuarioCrearDto asistenciax, Long id);
 }
