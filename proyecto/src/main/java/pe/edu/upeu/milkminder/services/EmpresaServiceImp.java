@@ -10,74 +10,71 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import pe.edu.upeu.milkminder.dtos.EmpresaDto;
+
 import pe.edu.upeu.milkminder.exceptions.AppException;
 import pe.edu.upeu.milkminder.exceptions.ResourceNotFoundException;
-import pe.edu.upeu.milkminder.mappers.EmpresaMapper;
+
 import pe.edu.upeu.milkminder.models.Empresa;
+
 import pe.edu.upeu.milkminder.repositories.EmpresaRepository;
 
-
-
-@RequiredArgsConstructor 
+@RequiredArgsConstructor
 @Service
 @Transactional
+
+
+
 public class EmpresaServiceImp implements EmpresaService{
 
     @Autowired
-    private EmpresaRepository empresaRepository;
-    
-    @Autowired
-    private FincaService fincaService;
-    
-    private final EmpresaMapper empresaMapper;
+    private EmpresaRepository empresaRepo;
+
+
     
     @Override
-    public Empresa save(EmpresaDto.EmpresaCrearDto entidad) {
-        Empresa varEnt=empresaMapper.empresaCrearDtoToEmpresa(entidad);
-        varEnt.setFincaId(fincaService.getFincaById(entidad.fincaId()));
-
+    public Empresa save(Empresa empresa) {
+        
         try {
-            return empresaRepository.save(varEnt);
+            return empresaRepo.save(empresa);
         } catch (Exception e) {
-            throw new AppException("Error-" + e.getMessage(), HttpStatus.BAD_REQUEST);
+            throw new AppException("Error-"+e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
     public List<Empresa> findAll() {
-            try {
-            return empresaRepository.findAll();
+        try {
+            return empresaRepo.findAll();
         } catch (Exception e) {
-            throw new AppException("Error-" + e.getMessage(), HttpStatus.BAD_REQUEST);
+            throw new AppException("Error-"+e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
     public Map<String, Boolean> delete(Long id) {
-        Empresa entidadx = empresaRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Materialesx not exist with id :" + id));
+        Empresa empresax = empresaRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Actividad not exist with id :" + id));
 
-        empresaRepository.delete(entidadx);
+        empresaRepo.delete(empresax);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", true);
 
-        return response;       
+        return response;        
     }
 
     @Override
     public Empresa getEmpresaById(Long id) {
-        Empresa findEntidad = empresaRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Materialesx not exist with id :" + id));
-        return findEntidad;        
+        Empresa findEmpresa = empresaRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Activiad not exist with id :" + id));
+        return findEmpresa;        
     }
 
     @Override
-    public Empresa update(EmpresaDto.EmpresaCrearDto entidad, Long id) {
-        Empresa entidadx = empresaRepository.findById(id)
+    public Empresa update(Empresa empresa, Long id) {
+        Empresa empresax = empresaRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Periodo not exist with id :" + id));
-        entidadx.setNombre(entidad.nombre());
-        return empresaRepository.save(entidadx);        
+        empresax.setNombre(empresa.getNombre());
+        
+        return empresaRepo.save(empresax);        
     }
     
 }

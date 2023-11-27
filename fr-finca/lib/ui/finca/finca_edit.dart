@@ -1,40 +1,34 @@
-import 'package:asistencia_app/bloc/ganado/ganado_bloc.dart';
+import 'package:asistencia_app/bloc/finca/finca_bloc.dart';
 import 'package:asistencia_app/comp/DropDownFormField.dart';
-import 'package:asistencia_app/modelo/GanadoModelo.dart';
+import 'package:asistencia_app/modelo/FincaModelo.dart';
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CompanyFormEdit extends StatefulWidget {
-  GanadoxModelo modelA;
+  FincaxModelo modelA;
 
   CompanyFormEdit({super.key, required this.modelA});
 
   @override
-  GanadoFormEditState createState() => GanadoFormEditState(modelA: modelA);
+  FincaFormEditState createState() => FincaFormEditState(modelA: modelA);
 }
 
-class GanadoFormEditState extends State<CompanyFormEdit> {
-  GanadoxModelo modelA;
-  GanadoFormEditState({required this.modelA}) : super();
+class FincaFormEditState extends State<CompanyFormEdit> {
+  FincaxModelo modelA;
+  FincaFormEditState({required this.modelA}) : super();
 
-  late String arete = "";
   late String nombre = "";
-  late String fechanac = "";
-  late String foto_url = "";
-  late String genero = "";
-  late int razaId = 0;
-  late int fincaId = 0;
-  List<Map<String, String>> generos = [
-    {'value': 'H', 'display': 'Hembra'},
-    {'value': 'M', 'display': 'Macho'}
-  ];
+  late String nomCort = "";
+  late String direccion = "";
+  late String descripcion = "";
+  late String ubigeo = "";
+  late String ttalHectareas = "";
+  late int empresaId=0;
 
   @override
   void initState() {
     super.initState();
-    print("ver: ${generos.map((item) => item['value']).toList()}");
-    print("verv: ${generos.map((item) => item['display']).toList()}");
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -43,34 +37,31 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
     isMultipleSelection: true,
   );
 
-  TextEditingController _fechanac = new TextEditingController();
-  DateTime? selectedDate;
-
-  void capturaArete(valor) {
-    arete = valor;
-  }
-
   void capturaNombre(valor) {
     nombre = valor;
   }
 
-  void capturaFechanac(valor) {
-    fechanac = valor;
+  void capturaNomCort(valor) {
+    nomCort = valor;
   }
 
-  void capturaFoto_url(valor) {
-    foto_url = valor;
+  void capturaDireccion(valor) {
+    direccion = valor;
   }
 
-  void capturaGenero(valor) {
-    genero = valor;
+  void capturaDescripcion(valor) {
+    descripcion = valor;
   }
 
-  void capturaRaza(valor) {
-    razaId = valor;
+  void capturaUbigeo(valor) {
+    ubigeo = valor;
   }
-  void capturaFinca(valor) {
-    fincaId = valor;
+  void capturaTtalHectareas(valor) {
+    ttalHectareas = valor;
+  }
+
+  void capturaEmpresa(valor) {
+    empresaId = valor;
   }
 
   @override
@@ -78,7 +69,7 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Form. Reg. Ganado B"),
+        title: const Text("Form. Reg. Finca B"),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -92,13 +83,15 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     _buildDatoCadena(
-                        capturaArete, modelA.arete, "Nombre arete:"),
-                    _buildDatoCadena(capturaNombre, modelA.nombre,
-                        "Nombre :"),
-                    _buildDatoCadena(capturaFechanac,modelA.arete,"fechanac:"),
-                    _buildDatoCadena(capturaFoto_url, modelA.fotoUrl, "foto_url:"),
-                    _buildDatoLista(capturaGenero, modelA.genero, "genero:", generos),
-                    //_buildDatoCadena(capturaRaza, modelA.userId as String, "Usuario:"),
+                        capturaNombre, modelA.nombre, "Nombre :"),
+                    _buildDatoCadena(capturaNomCort, modelA.nomCort,
+                        "nomCort :"),
+                    _buildDatoCadena(
+                        capturaDireccion, modelA.direccion, "direccion:"),
+                    _buildDatoCadena(capturaDescripcion, modelA.descripcion, "descripcion:"),
+                    _buildDatoCadena(capturaUbigeo, modelA.ubigeo, "ubigeo:"),
+                    _buildDatoCadena(capturaTtalHectareas, modelA.ttalHectareas, "ttalHectareas:"),
+                    //_buildDatoCadena(capturaEmpresa, modelA.empresaId as String, "empresaId:"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(
@@ -118,20 +111,20 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                GanadoModelo mp = GanadoModelo.unlaunched();
-                                mp.arete = arete;
+                                FincaModelo mp = FincaModelo.unlaunched();
                                 mp.nombre = nombre;
-                                mp.fechaNac = fechanac;
-                                mp.fotoUrl = foto_url;
-                                mp.genero = genero;
-                                mp.razaId= modelA.razaId.id;
-                                mp.fincaId= modelA.fincaId.id;
+                                mp.nomCort = nomCort;
+                                mp.direccion = direccion;
+                                mp.descripcion = descripcion;
+                                mp.ubigeo = ubigeo;
+                                mp.ttalHectareas = ttalHectareas;
+                                mp.ganadoId= modelA.empresaId.id;
                                 mp.id = modelA.id;
 
-                                /*var api = await Provider.of<GanadoApi>(
+                                /*var api = await Provider.of<FincaApi>(
                                     context,
                                     listen: false)
-                                    .updateGanado(TokenUtil.TOKEN,modelA.id.toInt(), mp);
+                                    .updateFinca(TokenUtil.TOKEN,modelA.id.toInt(), mp);
                                 print("ver: ${api.toJson()}");
                                 if (api.toJson()!=null) {
                                   Navigator.pop(context, () {
@@ -139,8 +132,8 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                                   });
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationHomeScreen()));
                                 }*/
-                                BlocProvider.of<GanadoBloc>(context)
-                                    .add(UpdateGanadoEvent(mp));
+                                BlocProvider.of<FincaBloc>(context)
+                                    .add(UpdateFincaEvent(mp));
                                 Navigator.pop(context, () {
                                   //setState(() {});
                                 });
@@ -217,62 +210,6 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
       dataSource: listaDato,
       textField: 'display',
       valueField: 'value',
-    );
-  }
-
-  Future<void> _selectDate(BuildContext context, Function obtValor) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2010),
-      lastDate: DateTime(2030),
-    );
-    if (pickedDate != null && pickedDate != selectedDate) {
-      setState(() {
-        selectedDate = pickedDate;
-        obtValor(selectedDate.toString());
-      });
-    }
-  }
-
-  Widget _buildDatoLista(Function obtValor,_dato, String label, List<dynamic> listaDato) {
-    return DropDownFormField(
-      titleText: label,
-      hintText: 'Seleccione',
-      value: _dato,
-      onSaved: (value) {
-        setState(() {
-          obtValor(value);
-        });
-      },
-      onChanged: (value) {
-        setState(() {
-          obtValor(value);
-        });
-      },
-      dataSource: listaDato,
-      textField: 'display',
-      valueField: 'value',
-    );
-  }
-
-  Widget _buildDatoFecha(Function obtValor, String label) {
-    return TextFormField(
-      decoration: InputDecoration(labelText: label),
-      controller: _fechanac,
-      keyboardType: TextInputType.datetime,
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'Nombre Requerido!';
-        }
-        return null;
-      },
-      onTap: (){
-        _selectDate(context,obtValor);
-      },
-      onSaved: (String? value) {
-        obtValor(value!);
-      },
     );
   }
 }

@@ -11,48 +11,56 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.upeu.milkminder.dtos.EmpresaDto;
+
 import pe.edu.upeu.milkminder.models.Empresa;
+import pe.edu.upeu.milkminder.models.Raza;
 import pe.edu.upeu.milkminder.services.EmpresaService;
+import pe.edu.upeu.milkminder.services.RazaService;
 
 @RestController
 @RequestMapping("/finca/empresa")
 public class EmpresaController {
-    @Autowired
-    private EmpresaService empresaService;   
     
-    @GetMapping(value = "/list")
+    @Autowired
+    private EmpresaService empresaService;
+    
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<List<Empresa>> listEmpresa() {
         List<Empresa> actDto = empresaService.findAll();
+        
+        //Gson gson = new Gson();
+        //String jsonCartList = gson.toJson(actDto);
+        //System.out.println("Ver Aqui: "+jsonCartList);
         return ResponseEntity.ok(actDto);
-        // return new ResponseEntity<>(actDto, HttpStatus.OK);
-    }  
+        //return new ResponseEntity<>(actDto, HttpStatus.OK);
+    }
     
     @PostMapping("/crear")
-    public ResponseEntity<Empresa> createEmpresa(@RequestBody EmpresaDto.EmpresaCrearDto entidadx) {        
-        Empresa data = empresaService.save(entidadx);
+    public ResponseEntity<Empresa> createEmpresa(@RequestBody Empresa empresa) {
+        Empresa data = empresaService.save(empresa);
         return ResponseEntity.ok(data);
-    }    
+    }
     
     @GetMapping("/buscar/{id}")
     public ResponseEntity<Empresa> getEmpresaById(@PathVariable Long id) {
-        Empresa entidadx = empresaService.getEmpresaById(id);
-        return ResponseEntity.ok(entidadx);
-    }    
+        Empresa empresa = empresaService.getEmpresaById(id);
+        return ResponseEntity.ok(empresa);
+    }
     
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteEmpresa(@PathVariable Long id) {
-        Empresa entidadx = empresaService.getEmpresaById(id);
-        return ResponseEntity.ok(empresaService.delete(entidadx.getId()));
-    }   
+        Empresa empresa = empresaService.getEmpresaById(id);
+        return ResponseEntity.ok(empresaService.delete(empresa.getId()));
+    }
     
     @PutMapping("/editar/{id}")
-    public ResponseEntity<Empresa> updateEmpresa(@PathVariable Long id,
-            @RequestBody EmpresaDto.EmpresaCrearDto entidadxDetails) {
-        Empresa updatedEntidadx = empresaService.update(entidadxDetails, id);
-        return ResponseEntity.ok(updatedEntidadx);
-    }    
+    public ResponseEntity<Empresa> updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresaDetails) {        
+        Empresa updatedEmpresa = empresaService.update(empresaDetails, id);
+        return ResponseEntity.ok(updatedEmpresa);
+    } 
+     
 }
 

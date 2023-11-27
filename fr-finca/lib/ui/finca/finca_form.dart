@@ -1,38 +1,34 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:asistencia_app/bloc/ganado/ganado_bloc.dart';
+import 'package:asistencia_app/bloc/finca/finca_bloc.dart';
 import 'package:asistencia_app/comp/DropDownFormField.dart';
-import 'package:asistencia_app/modelo/GanadoModelo.dart';
+import 'package:asistencia_app/modelo/FincaModelo.dart';
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class GanadoForm extends StatefulWidget {
-  const GanadoForm({super.key});
+class FincaForm extends StatefulWidget {
+  const FincaForm({super.key});
 
   @override
-  _GanadoFormState createState() => _GanadoFormState();
+  _FincaFormState createState() => _FincaFormState();
 }
 
-class _GanadoFormState extends State<GanadoForm> {
-  late String arete = "";
+class _FincaFormState extends State<FincaForm> {
   late String nombre = "";
-  late String fechanac = "";
-  late String foto_url = "";
-  late String genero = "";
-  late int razaId;
-  late int fincaId;
-  List<Map<String, String>> generos = [
-    {'value': 'H', 'display': 'Hembra'},
-    {'value': 'M', 'display': 'Macho'}
-  ];
+  late String nomCort = "";
+  late String direccion = "";
+  late String descripcion = "";
+  late String ubigeo = "";
+  late String ttalHectareas = "";
+  late int empresaId;
+
   @override
 
   void initState() {
     super.initState();
-    print("ver: ${generos.map((item) => item['value']).toList()}");
-    print("verv: ${generos.map((item) => item['display']).toList()}");
+
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -42,33 +38,32 @@ class _GanadoFormState extends State<GanadoForm> {
   );
 
 
-  TextEditingController _fechanac = new TextEditingController();
-  DateTime? selectedDate;
-  void capturaArete(valor) {
-    arete = valor;
-  }
 
   void capturaNombre(valor) {
     nombre = valor;
   }
 
-  void capturaFechanac(valor) {
-    _fechanac.text = valor;
+  void capturaNomCort(valor) {
+    nomCort = valor;
   }
 
-  void capturaFoto_url(valor) {
-    foto_url = valor;
+  void capturaDireccion(valor) {
+    direccion = valor;
   }
 
-  void capturaGenero(valor) {
-    genero = valor;
+  void capturaDescripcion(valor) {
+    descripcion = valor;
   }
 
-  void capturaRaza(valor) {
-    razaId = valor;
+  void capturaUbigeo(valor) {
+    ubigeo = valor;
   }
-  void capturaFinca(valor) {
-    fincaId = valor;
+  void capturaTtalHectareas(valor) {
+    ttalHectareas = valor;
+  }
+
+  void capturaEmpresa(valor) {
+    empresaId = valor;
   }
 
   @override
@@ -76,7 +71,7 @@ class _GanadoFormState extends State<GanadoForm> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Form. Reg. Ganado B"),
+        title: const Text("Form. Reg. Finca B"),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -90,14 +85,15 @@ class _GanadoFormState extends State<GanadoForm> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     _buildDatoCadena(
-                        capturaArete, "Nombre arete:"),
-                    _buildDatoCadena(capturaNombre,
-                        "Nombre :"),
-                    _buildDatoFecha(capturaFechanac,"fechanac:"),
-                    _buildDatoCadena(capturaFoto_url, "foto_url:"),
-                    _buildDatoLista(capturaGenero,genero, "Genero:", generos),
-                    _buildDatoEntero(capturaRaza,  "Raza:"),
-                    _buildDatoEntero(capturaFinca,  "Finca:"),
+                        capturaNombre, "Nombre :"),
+                    _buildDatoCadena(capturaNomCort,
+                        "NomCort :"),
+                    _buildDatoCadena(
+                        capturaDireccion,"Direccion:"),
+                    _buildDatoCadena(capturaDescripcion, "Descripcion:"),
+                    _buildDatoCadena(capturaUbigeo, "Ubigeo:"),
+                    _buildDatoCadena(capturaTtalHectareas, "TtalHectareas:"),
+                    _buildDatoEntero(capturaEmpresa,  "Empresa:"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(
@@ -117,17 +113,17 @@ class _GanadoFormState extends State<GanadoForm> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                GanadoModelo mp = GanadoModelo.unlaunched();
-                                mp.arete = arete;
+                                FincaModelo mp = FincaModelo.unlaunched();
                                 mp.nombre = nombre;
-                                mp.fechaNac = DateFormat('yyyy-MM-dd').format(DateTime.parse(_fechanac.value.text));
-                                mp.fotoUrl = foto_url;
-                                mp.genero = genero;
-                                mp.razaId = razaId;
-                                mp.fincaId = fincaId;
+                                mp.nomCort = nomCort;
+                                mp.direccion = direccion;
+                                mp.descripcion = descripcion;
+                                mp.ubigeo = ubigeo;
+                                mp.ttalHectareas = ttalHectareas;
+                                mp.ganadoId = empresaId;
 
-                                BlocProvider.of<GanadoBloc>(context)
-                                    .add(CreateGanadoEvent(mp));
+                                BlocProvider.of<FincaBloc>(context)
+                                    .add(CreateFincaEvent(mp));
                                 Navigator.pop(context, () {
                                   //setState(() {});
                                 });
@@ -183,60 +179,6 @@ class _GanadoFormState extends State<GanadoForm> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context, Function obtValor) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2010),
-      lastDate: DateTime(2030),
-    );
-    if (pickedDate != null && pickedDate != selectedDate) {
-      setState(() {
-        selectedDate = pickedDate;
-        obtValor(selectedDate.toString());
-      });
-    }
-  }
 
-  Widget _buildDatoLista(Function obtValor,_dato, String label, List<dynamic> listaDato) {
-    return DropDownFormField(
-      titleText: label,
-      hintText: 'Seleccione',
-      value: _dato,
-      onSaved: (value) {
-        setState(() {
-          obtValor(value);
-        });
-      },
-      onChanged: (value) {
-        setState(() {
-          obtValor(value);
-        });
-      },
-      dataSource: listaDato,
-      textField: 'display',
-      valueField: 'value',
-    );
-  }
-
-  Widget _buildDatoFecha(Function obtValor, String label) {
-    return TextFormField(
-      decoration: InputDecoration(labelText: label),
-      controller: _fechanac,
-      keyboardType: TextInputType.datetime,
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'Nombre Requerido!';
-        }
-        return null;
-      },
-      onTap: (){
-        _selectDate(context,obtValor);
-      },
-      onSaved: (String? value) {
-        obtValor(value!);
-      },
-    );
-  }
 
 }

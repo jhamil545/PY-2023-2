@@ -32,8 +32,5 @@ public class Raza {
     @Column(name = "nombre_raza", nullable = false)
     private String nombreRaza;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "raza_id", referencedColumnName = "id")
-    @JsonIgnoreProperties({"razaId"})
-    public List<Ganado> ganado;
+    
 }

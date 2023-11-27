@@ -1,5 +1,6 @@
-import 'package:asistencia_app/bloc/raza/raza_bloc.dart';
-import 'package:asistencia_app/modelo/RazaModelo.dart';
+import 'package:asistencia_app/bloc/empresa/empresa_bloc.dart';
+import 'package:asistencia_app/modelo/EmpresaModelo.dart';
+
 import 'package:asistencia_app/theme/AppTheme.dart';
 import 'package:asistencia_app/util/TokenUtil.dart';
 import 'package:checkbox_grouped/checkbox_grouped.dart';
@@ -11,22 +12,26 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RazaFormEdit extends StatefulWidget {
-  RazaModelo modelA;
+class EmpresaFormEdit extends StatefulWidget {
+  EmpresaModelo modelA;
 
-  RazaFormEdit({required this.modelA}) : super();
+  EmpresaFormEdit({required this.modelA}) : super();
 
   @override
-  _RazaFormEditState createState() => _RazaFormEditState(modelA: modelA);
+  _EmpresaFormEditState createState() => _EmpresaFormEditState(modelA: modelA);
 }
 
-class _RazaFormEditState extends State<RazaFormEdit> {
-  RazaModelo modelA;
+class _EmpresaFormEditState extends State<EmpresaFormEdit> {
+  EmpresaModelo modelA;
 
-  _RazaFormEditState({required this.modelA}) : super();
+  _EmpresaFormEditState({required this.modelA}) : super();
 
-  late int _periodoId = 0;
-  late String _nombreRaza = "";
+  late int _Id = 0;
+  late  String _nombre= "";
+  late  String _nomCort= "";
+  late  String _direccionFiscal= "";
+  late  String _ruc= "";
+  late  String _ubigeo= "";
 
   Position? currentPosition;
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
@@ -43,8 +48,23 @@ class _RazaFormEditState extends State<RazaFormEdit> {
   );
 
   void capturaNombre(valor) {
-    this._nombreRaza = valor;
+    this._nombre = valor;
+
   }
+  void capturaNomCort(valor) {
+    this._nomCort = valor;
+
+  }
+  void capturaDireccionFiscal(valor) {
+    this._direccionFiscal = valor;
+  }
+  void capturaRuc(valor) {
+    this._ruc = valor;
+  }
+  void capturaUbigeo(valor) {
+    this._ubigeo = valor;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +72,7 @@ class _RazaFormEditState extends State<RazaFormEdit> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Form. Reg. Raza B"),
+        title: const Text("Form. Reg. Empresa B"),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -66,7 +86,16 @@ class _RazaFormEditState extends State<RazaFormEdit> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     _buildDatoCadena(
-                        capturaNombre, modelA.nombreRaza, "Nombre Raza:"),
+                        capturaNombre, modelA.nombre, "Nombre Empresa:"),
+                    _buildDatoCadena(
+                        capturaNomCort, modelA.nomCort, "nomCort:"),
+                    _buildDatoCadena(
+                        capturaDireccionFiscal, modelA.direccionFiscal, "direccionFiscal:"),
+                    _buildDatoCadena(
+                        capturaRuc, modelA.ruc, "ruc:"),
+                    _buildDatoCadena(
+                        capturaUbigeo, modelA.ubigeo, "ubigeo:"),
+
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(
@@ -86,20 +115,24 @@ class _RazaFormEditState extends State<RazaFormEdit> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                RazaModelo mp = new RazaModelo.unlaunched();
-                                mp.nombreRaza = _nombreRaza;
+                                EmpresaModelo mp = new EmpresaModelo.unlaunched();
+                                mp.nombre = _nombre;
+                                mp.nomCort = _nomCort;
+                                mp.direccionFiscal = _direccionFiscal;
+                                mp.ruc = _ruc;
+                                mp.ubigeo = _ubigeo;
 
                                 final prefs =
                                     await SharedPreferences.getInstance();
 
                                 mp.id = modelA.id;
 
-                                print("P:${_periodoId}, NA:${_nombreRaza},");
+                                print("P:${_nombre}, NA:${_nomCort},");
 
-                                /*var api = await Provider.of<RazaApi>(
+                                /*var api = await Provider.of<EmpresaApi>(
                                     context,
                                     listen: false)
-                                    .updateRaza(TokenUtil.TOKEN,modelA.id.toInt(), mp);
+                                    .updateEmpresa(TokenUtil.TOKEN,modelA.id.toInt(), mp);
                                 print("ver: ${api.toJson()}");
                                 if (api.toJson()!=null) {
                                   Navigator.pop(context, () {
@@ -107,8 +140,8 @@ class _RazaFormEditState extends State<RazaFormEdit> {
                                   });
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationHomeScreen()));
                                 }*/
-                                BlocProvider.of<RazaBloc>(context)
-                                    .add(UpdateRazaEvent(mp));
+                                BlocProvider.of<EmpresaBloc>(context)
+                                    .add(UpdateEmpresaEvent(mp));
                                 Navigator.pop(context, () {
                                   //setState(() {});
                                 });

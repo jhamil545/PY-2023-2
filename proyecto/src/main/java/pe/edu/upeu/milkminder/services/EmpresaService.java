@@ -3,11 +3,11 @@ package pe.edu.upeu.milkminder.services;
 import java.util.List;
 import java.util.Map;
 
-import pe.edu.upeu.milkminder.dtos.EmpresaDto;
+
 import pe.edu.upeu.milkminder.models.Empresa;
 
 public interface EmpresaService {
-    Empresa save(EmpresaDto.EmpresaCrearDto entidad);
+     Empresa save(Empresa empresa);
 
     List<Empresa> findAll();
 
@@ -15,5 +15,6 @@ public interface EmpresaService {
 
     Empresa getEmpresaById(Long id);
 
-    Empresa update(EmpresaDto.EmpresaCrearDto entidad, Long id);     
+    Empresa update(Empresa empresa, Long id);   
+  
 }

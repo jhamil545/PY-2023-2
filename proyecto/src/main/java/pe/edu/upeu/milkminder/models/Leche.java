@@ -49,4 +49,5 @@ public class Leche {
     @JsonIgnoreProperties({"leche", "", "", ""})
     private Ganado ganadoId; 
 
+    
 }

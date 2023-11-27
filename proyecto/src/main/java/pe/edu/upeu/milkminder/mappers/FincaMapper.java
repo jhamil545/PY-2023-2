@@ -11,7 +11,7 @@ public interface FincaMapper{
     
     FincaDto toFincaDto(Finca endtidad);
     
-    @Mapping(target = "ganadoId", ignore = true)
+    @Mapping(target = "empresaId", ignore = true)
     Finca fincaCrearDtoToFinca(FincaDto.FincaCrearDto entidadCrearDto);
     
 }

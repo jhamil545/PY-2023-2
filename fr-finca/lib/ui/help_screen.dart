@@ -1,4 +1,6 @@
 import 'package:asistencia_app/comp/CustomAppBarX.dart';
+import 'package:asistencia_app/ui/empresa/empresa_main.dart';
+import 'package:asistencia_app/ui/finca/finca_main.dart';
 import 'package:asistencia_app/ui/ganado/ganado_main.dart';
 import 'package:asistencia_app/ui/raza/raza_main.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,7 @@ class _HelpScreenState extends State<HelpScreen> {
             children: [
               CustomGridItem(
                 imageAsset: 'assets/imagen/man-icon.png',
-                text: 'Button 1',
+                text: 'Ganado',
                 onTapCallback: () {
                   // Navegar a MainGanado cuando se toca Button 1
                   Navigator.push(
@@ -57,14 +59,41 @@ class _HelpScreenState extends State<HelpScreen> {
                 },
               ),
               CustomGridItem(
-                imageAsset: 'assets/imagen/woman-icon.png',
-                text: 'Button 2',
+                imageAsset: 'assets/imagen/man-icon.png',
+                text: 'Raza',
                 onTapCallback: () {
                   // Navegar a MainRaza cuando se toca Button 2
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => MainRaza(),
+                    ),
+                  );
+                },
+              ),
+              CustomGridItem(
+                imageAsset: 'assets/imagen/man-icon.png',
+                text: 'Finca',
+                onTapCallback: () {
+                  // Navegar a MainRaza cuando se toca Button 2
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainFinca(),
+                    ),
+                  );
+                },
+              ),
+
+              CustomGridItem(
+                imageAsset: 'assets/imagen/man-icon.png',
+                text: 'Empresa',
+                onTapCallback: () {
+                  // Navegar a MainRaza cuando se toca Button 2
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainEmpresa(),
                     ),
                   );
                 },

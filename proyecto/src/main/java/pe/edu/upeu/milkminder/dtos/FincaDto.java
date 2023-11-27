@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.edu.upeu.milkminder.models.Empresa;
 
-import pe.edu.upeu.milkminder.models.Ganado;
 
 @Data
 @AllArgsConstructor
@@ -17,15 +17,15 @@ import pe.edu.upeu.milkminder.models.Ganado;
 public class FincaDto {
   Long id;   
   String nombre;
-  String nom_cort;
+  String nomCort;
   String direccion;
   String descripcion;
   String ubigeo;
-  Double ttal_hectareas;
+  Double ttalHectareas;
   @JsonIgnoreProperties({"finca"})
-  Ganado ganadoId; 
+  Empresa empresaId; 
   
-  public record FincaCrearDto(Long id,String nombre,String nom_cort,String direccion,
-  String descripcion,String ubigeo,Double ttal_hectareas,
-    Long ganadoId){}
+  public record FincaCrearDto(Long id,String nombre,String nomCort,String direccion,
+  String descripcion,String ubigeo,Double ttalHectareas,
+    Long empresaId){}
 }
