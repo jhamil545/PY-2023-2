@@ -12,6 +12,9 @@ public interface GanadoMapper{
     GanadoDto toGanadoDto(Ganado endtidad);
     
     @Mapping(target = "razaId", ignore = true)
+    @Mapping(target = "fincaId", ignore = true)
     Ganado ganadoCrearDtoToGanado(GanadoDto.GanadoCrearDto entidadCrearDto);
+   
+   
     
 }

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.edu.upeu.milkminder.models.Finca;
 import pe.edu.upeu.milkminder.models.Raza;
 
 @Data
@@ -19,11 +20,13 @@ public class GanadoDto {
   String nombre; 
   @JsonFormat(pattern = "yyyy-MM-dd")
   LocalDate fechaNac;  
-  String genero;
   String fotoUrl;
-  @JsonIgnoreProperties({"ganado"})
-  Raza razaId; 
+  String genero;
   
-  public record GanadoCrearDto(Long id,String arete,String nombre,LocalDate fechaNac,
-        String genero,String fotoUrl,  Long razaId){}
+  @JsonIgnoreProperties({"ganado"})
+  Raza razaId;
+  Finca fincaId; 
+  
+  public record GanadoCrearDto(Long id,String arete,String nombre,LocalDate fechaNac,String fotoUrl,
+        String genero,Long razaId,Long fincaId ){}
 }

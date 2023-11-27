@@ -18,7 +18,7 @@ class MainLogin extends StatelessWidget {
       create: (_) => UsuarioApi.create(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.blue),
+        theme: ThemeData(primaryColor: Colors.lightBlue),
         home: LoginPage(),
       ),
     );
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
 
       body: Container(
-        color: Colors.indigoAccent,
+        color: Colors.blueAccent,
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -62,9 +62,9 @@ class _LoginPageState extends State<LoginPage> {
 
               children: <Widget>[
                 Text(
-                  'BIENBENIDO A MILKMINDER',
+                  'BIENVENIDO A MILKMINDER',
                   style:TextStyle(
-                    color: Colors.redAccent,
+                    color: Colors.white60,
                     fontSize: 30,
                   ),
                 ),

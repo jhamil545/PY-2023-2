@@ -22,6 +22,7 @@ class _GanadoFormState extends State<GanadoForm> {
   late String foto_url = "";
   late String genero = "";
   late int razaId;
+  late int fincaId;
   List<Map<String, String>> generos = [
     {'value': 'H', 'display': 'Hembra'},
     {'value': 'M', 'display': 'Macho'}
@@ -66,6 +67,9 @@ class _GanadoFormState extends State<GanadoForm> {
   void capturaRaza(valor) {
     razaId = valor;
   }
+  void capturaFinca(valor) {
+    fincaId = valor;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +93,11 @@ class _GanadoFormState extends State<GanadoForm> {
                         capturaArete, "Nombre arete:"),
                     _buildDatoCadena(capturaNombre,
                         "Nombre :"),
-                    _buildDatoFecha(
-                        capturaFechanac,"fechanac:"),
+                    _buildDatoFecha(capturaFechanac,"fechanac:"),
                     _buildDatoCadena(capturaFoto_url, "foto_url:"),
                     _buildDatoLista(capturaGenero,genero, "Genero:", generos),
                     _buildDatoEntero(capturaRaza,  "Raza:"),
+                    _buildDatoEntero(capturaFinca,  "Finca:"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(
@@ -120,6 +124,7 @@ class _GanadoFormState extends State<GanadoForm> {
                                 mp.fotoUrl = foto_url;
                                 mp.genero = genero;
                                 mp.razaId = razaId;
+                                mp.fincaId = fincaId;
 
                                 BlocProvider.of<GanadoBloc>(context)
                                     .add(CreateGanadoEvent(mp));

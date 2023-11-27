@@ -92,6 +92,12 @@ class _GanadoUIState extends State<GanadoUI> {
           title: const Text(
             'Lista de Ganados Bloc',
           ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           automaticallyImplyLeading: false,
           centerTitle: true,
           actions: <Widget>[

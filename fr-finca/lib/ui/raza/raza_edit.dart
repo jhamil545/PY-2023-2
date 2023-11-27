@@ -42,7 +42,7 @@ class _RazaFormEditState extends State<RazaFormEdit> {
     isMultipleSelection: true,
   );
 
-  void capturaNombreAct(valor) {
+  void capturaNombre(valor) {
     this._nombreRaza = valor;
   }
 
@@ -66,7 +66,7 @@ class _RazaFormEditState extends State<RazaFormEdit> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     _buildDatoCadena(
-                        capturaNombreAct, modelA.nombreRaza, "Nombre Raza:"),
+                        capturaNombre, modelA.nombreRaza, "Nombre Raza:"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(

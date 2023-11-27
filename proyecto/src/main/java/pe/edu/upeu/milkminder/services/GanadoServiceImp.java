@@ -14,6 +14,7 @@ import pe.edu.upeu.milkminder.dtos.GanadoDto;
 import pe.edu.upeu.milkminder.exceptions.AppException;
 import pe.edu.upeu.milkminder.exceptions.ResourceNotFoundException;
 import pe.edu.upeu.milkminder.mappers.GanadoMapper;
+
 import pe.edu.upeu.milkminder.models.Ganado;
 import pe.edu.upeu.milkminder.repositories.GanadoRepository;
 
@@ -27,16 +28,21 @@ public class GanadoServiceImp implements GanadoService{
     
     @Autowired
     private RazaService razaService;
+    @Autowired
+    private FincaService fincaService;
     
     private final GanadoMapper ganadoMapper;
     
     @Override
     public Ganado save(GanadoDto.GanadoCrearDto entidad) {
         Ganado varEnt=ganadoMapper.ganadoCrearDtoToGanado(entidad);
+        System.out.println("Ganado antes de guardar: " + varEnt);
         varEnt.setRazaId(razaService.getRazaById(entidad.razaId()));
-
+        varEnt.setFincaId(fincaService.getFincaById(entidad.fincaId()));
         try {
-            return ganadoRepository.save(varEnt);
+            Ganado savedEntity = ganadoRepository.save(varEnt);
+            System.out.println("Ganado guardado: " + savedEntity);
+            return savedEntity;
         } catch (Exception e) {
             throw new AppException("Error-" + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -62,6 +68,7 @@ public class GanadoServiceImp implements GanadoService{
 
         return response;       
     }
+
 
     @Override
     public Ganado getGanadoById(Long id) {

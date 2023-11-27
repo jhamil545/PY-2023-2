@@ -1,8 +1,10 @@
 package pe.edu.upeu.milkminder.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.upeu.milkminder.dtos.GanadoDto;
+import pe.edu.upeu.milkminder.exceptions.ResourceNotFoundException;
+import pe.edu.upeu.milkminder.models.Empresa;
 import pe.edu.upeu.milkminder.models.Ganado;
 import pe.edu.upeu.milkminder.services.GanadoService;
 
@@ -46,9 +50,11 @@ public class GanadoController {
     
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteGanado(@PathVariable Long id) {
-       Ganado entidadx = ganadoService.getGanadoById(id);
+        Ganado entidadx = ganadoService.getGanadoById(id);
         return ResponseEntity.ok(ganadoService.delete(entidadx.getId()));
-    }   
+    } 
+
+
     
     @PutMapping("/editar/{id}")
     public ResponseEntity<Ganado> updateGanado(@PathVariable Long id,

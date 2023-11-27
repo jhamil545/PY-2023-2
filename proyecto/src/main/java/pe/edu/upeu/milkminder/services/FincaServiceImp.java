@@ -27,14 +27,14 @@ public class FincaServiceImp implements FincaService{
     private FincaRepository fincaRepository;
     
     @Autowired
-    private GanadoService ganadoService;
+    private EmpresaService empresaService;
     
     private final FincaMapper fincaMapper;
     
     @Override
     public Finca save(FincaDto.FincaCrearDto entidad) {
         Finca varEnt=fincaMapper.fincaCrearDtoToFinca(entidad);
-        varEnt.setGanadoId(ganadoService.getGanadoById(entidad.ganadoId()));
+        varEnt.setEmpresaId(empresaService.getEmpresaById(entidad.empresaId()));
 
         try {
             return fincaRepository.save(varEnt);

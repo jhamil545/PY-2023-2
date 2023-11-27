@@ -24,6 +24,7 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
   late String foto_url = "";
   late String genero = "";
   late int razaId = 0;
+  late int fincaId = 0;
   List<Map<String, String>> generos = [
     {'value': 'H', 'display': 'Hembra'},
     {'value': 'M', 'display': 'Macho'}
@@ -41,6 +42,9 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
   GroupController multipleCheckController = GroupController(
     isMultipleSelection: true,
   );
+
+  TextEditingController _fechanac = new TextEditingController();
+  DateTime? selectedDate;
 
   void capturaArete(valor) {
     arete = valor;
@@ -65,6 +69,9 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
   void capturaRaza(valor) {
     razaId = valor;
   }
+  void capturaFinca(valor) {
+    fincaId = valor;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +95,9 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                         capturaArete, modelA.arete, "Nombre arete:"),
                     _buildDatoCadena(capturaNombre, modelA.nombre,
                         "Nombre :"),
-                    _buildDatoCadena(
-                        capturaFechanac, modelA.fechaNac, "fechanac:"),
+                    _buildDatoCadena(capturaFechanac,modelA.fechaNac,"fechanac:"),
                     _buildDatoCadena(capturaFoto_url, modelA.fotoUrl, "foto_url:"),
-                    _buildDatoCadena(capturaGenero, modelA.genero, "genero:"),
+                    _buildDatoLista(capturaGenero, modelA.genero, "genero:", generos),
                     //_buildDatoCadena(capturaRaza, modelA.userId as String, "Usuario:"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -119,6 +125,7 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                                 mp.fotoUrl = foto_url;
                                 mp.genero = genero;
                                 mp.razaId= modelA.razaId.id;
+                                mp.fincaId= modelA.fincaId.id;
                                 mp.id = modelA.id;
 
                                 /*var api = await Provider.of<GanadoApi>(
@@ -210,6 +217,62 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
       dataSource: listaDato,
       textField: 'display',
       valueField: 'value',
+    );
+  }
+
+  Future<void> _selectDate(BuildContext context, Function obtValor) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2030),
+    );
+    if (pickedDate != null && pickedDate != selectedDate) {
+      setState(() {
+        selectedDate = pickedDate;
+        obtValor(selectedDate.toString());
+      });
+    }
+  }
+
+  Widget _buildDatoLista(Function obtValor,_dato, String label, List<dynamic> listaDato) {
+    return DropDownFormField(
+      titleText: label,
+      hintText: 'Seleccione',
+      value: _dato,
+      onSaved: (value) {
+        setState(() {
+          obtValor(value);
+        });
+      },
+      onChanged: (value) {
+        setState(() {
+          obtValor(value);
+        });
+      },
+      dataSource: listaDato,
+      textField: 'display',
+      valueField: 'value',
+    );
+  }
+
+  Widget _buildDatoFecha(Function obtValor, String label) {
+    return TextFormField(
+      decoration: InputDecoration(labelText: label),
+      controller: _fechanac,
+      keyboardType: TextInputType.datetime,
+      validator: (String? value) {
+        if (value!.isEmpty) {
+          return 'Nombre Requerido!';
+        }
+        return null;
+      },
+      onTap: (){
+        _selectDate(context,obtValor);
+      },
+      onSaved: (String? value) {
+        obtValor(value!);
+      },
     );
   }
 }

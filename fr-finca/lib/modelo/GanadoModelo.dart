@@ -1,3 +1,4 @@
+import 'package:asistencia_app/modelo/FincaModelo.dart';
 import 'package:asistencia_app/modelo/RazaModelo.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -11,6 +12,7 @@ class GanadoModelo {
   late final String fotoUrl;
   late final String genero;
   late final int razaId;
+  late final int fincaId;
 
   GanadoModelo({
     required this.id,
@@ -20,6 +22,7 @@ class GanadoModelo {
     required this.fotoUrl,
     required this.genero,
     required this.razaId,
+    required this.fincaId,
   });
   GanadoModelo.unlaunched();
 
@@ -32,6 +35,7 @@ class GanadoModelo {
     genero = json['genero'];
 
     razaId = json['razaId'];
+    razaId = json['fincaId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +47,7 @@ class GanadoModelo {
     _data['fotoUrl'] = fotoUrl;
     _data['genero'] = genero;
     _data['razaId'] = razaId;
+    _data['fincaId'] = fincaId;
 
     return _data;
   }
@@ -57,6 +62,7 @@ class GanadoxModelo {
     required this.fotoUrl,
     required this.genero,
     required this.razaId,
+    required this.fincaId,
   });
   GanadoxModelo.unlaunched();
   late  int id = 0;
@@ -66,6 +72,7 @@ class GanadoxModelo {
   late final String fotoUrl;
   late final String genero;
   late final RazaModelo razaId;
+  late final FincaxModelo fincaId;
 
   GanadoxModelo.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -75,6 +82,7 @@ class GanadoxModelo {
     fotoUrl = json['fotoUrl'];
     genero = json['genero'];
     razaId = RazaModelo.fromJson(json['razaId']);
+    fincaId = FincaxModelo.fromJson(json['fincaId']);
   }
 
   Map<String, dynamic> toJson() {
@@ -86,31 +94,8 @@ class GanadoxModelo {
     _data['fotoUrl'] = fotoUrl;
     _data['genero'] = genero;
     _data['razaId'] = razaId.toJson();
+    _data['fincaId'] = fincaId.toJson();
     return _data;
   }
 }
 
-class RazaModelo {
-  RazaModelo({
-    required this.id,
-    required this.nombreRaza,
-
-  });
-  late final int id;
-  late final String nombreRaza;
-
-
-  RazaModelo.fromJson(Map<String, dynamic> json){
-    id = json['id'];
-    nombreRaza = json['nombreRaza'];
-
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['nombreRaza'] = nombreRaza;
-
-    return _data;
-  }
-}

@@ -18,11 +18,11 @@ public class LecheDto {
   Long id;   
   @JsonFormat(pattern = "yyyy-MM-dd")
   LocalDate fecha; 
-  String cantidadLt; 
+  Double cantidadLt; 
   String turno;
   @JsonIgnoreProperties({"leche"})
   Ganado ganadoId; 
   
   public record LecheCrearDto(Long id,LocalDate fecha,
-        String cantidadLt,String turno,  Long ganadoId){}
+        Double cantidadLt,String turno,  Long ganadoId){}
 }
