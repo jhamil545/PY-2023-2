@@ -46,7 +46,11 @@ public class GanadoController {
     
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteGanado(@PathVariable Long id) {
+<<<<<<< HEAD
         Ganado entidadx = ganadoService.getGanadoById(id);
+=======
+       Ganado entidadx = ganadoService.getGanadoById(id);
+>>>>>>> main
         return ResponseEntity.ok(ganadoService.delete(entidadx.getId()));
     }   
     

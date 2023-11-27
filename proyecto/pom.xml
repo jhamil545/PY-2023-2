@@ -19,12 +19,15 @@
         <exec.mainClass>pe.edu.upeu.asistencia.SysAsistenciaAnApplication</exec.mainClass>
     </properties>
     <dependencies>
+<<<<<<< HEAD
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+=======
+>>>>>>> main
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>

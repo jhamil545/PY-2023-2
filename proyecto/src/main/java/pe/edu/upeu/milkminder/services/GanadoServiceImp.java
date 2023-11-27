@@ -75,6 +75,10 @@ public class GanadoServiceImp implements GanadoService{
         Ganado entidadx = ganadoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Periodo not exist with id :" + id));
         entidadx.setNombre(entidad.nombre());
+<<<<<<< HEAD
+=======
+        entidadx.setArete(entidad.arete());
+>>>>>>> main
         return ganadoRepository.save(entidadx);        
     }
     

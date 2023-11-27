@@ -1,7 +1,10 @@
 package pe.edu.upeu.milkminder.models;
 
 import java.time.LocalDate;
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> main
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,8 +13,11 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+<<<<<<< HEAD
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+=======
+>>>>>>> main
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,9 +38,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "ganado")
 public class Ganado {
+<<<<<<< HEAD
 
     
 
+=======
+>>>>>>> main
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,21 +58,33 @@ public class Ganado {
     @Basic(optional = false)
     @Column(name = "fecha_nacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
+<<<<<<< HEAD
     private LocalDate fechanac;
 
     @Column(name = "foto_url", nullable = false)
     private String foto_url;
+=======
+    private LocalDate fechaNac;
+
+    @Column(name = "foto_url", nullable = false)
+    private String fotoUrl;
+>>>>>>> main
 
     @Column(name = "genero", nullable = false)
     private String genero;
 
     @JoinColumn(name = "raza_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+<<<<<<< HEAD
     @JsonIgnoreProperties({"ganados", "", "", ""})
     private Raza razaId;  
 
     @OneToMany(mappedBy = "ganado", fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private List<Control> control;
+=======
+    @JsonIgnoreProperties({"ganado", "", "", ""})
+    private Raza razaId;  
+>>>>>>> main
     
 }
