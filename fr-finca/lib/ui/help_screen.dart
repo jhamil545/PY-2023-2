@@ -2,7 +2,10 @@ import 'package:asistencia_app/comp/CustomAppBarX.dart';
 import 'package:asistencia_app/ui/empresa/empresa_main.dart';
 import 'package:asistencia_app/ui/finca/finca_main.dart';
 import 'package:asistencia_app/ui/ganado/ganado_main.dart';
+import 'package:asistencia_app/ui/leche/leche_main.dart';
 import 'package:asistencia_app/ui/raza/raza_main.dart';
+import 'package:asistencia_app/ui/reportes/paginafinca.dart';
+import 'package:asistencia_app/ui/reportes/paginaleche.dart';
 import 'package:flutter/material.dart';
 import 'package:asistencia_app/comp/CustomAppBar.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';
@@ -47,57 +50,71 @@ class _HelpScreenState extends State<HelpScreen> {
             children: [
               CustomGridItem(
                 imageAsset: 'assets/imagen/man-icon.png',
-                text: 'Ganado',
+                text: 'Modulo Ganado',
                 onTapCallback: () {
                   // Navegar a MainGanado cuando se toca Button 1
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainGanado(),
+                      builder: (context) => ReporteGanado(),
                     ),
                   );
                 },
               ),
               CustomGridItem(
                 imageAsset: 'assets/imagen/man-icon.png',
-                text: 'Raza',
+                text: 'Modulo de Leche',
                 onTapCallback: () {
-                  // Navegar a MainRaza cuando se toca Button 2
+                  // Navegar a MainGanado cuando se toca Button 1
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainRaza(),
+                     builder: (context) => ReporteDeLeche(),
                     ),
                   );
                 },
               ),
               CustomGridItem(
                 imageAsset: 'assets/imagen/man-icon.png',
-                text: 'Finca',
+                text: 'Modulo Ganado',
                 onTapCallback: () {
-                  // Navegar a MainRaza cuando se toca Button 2
+                  // Navegar a MainGanado cuando se toca Button 1
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainFinca(),
+                      builder: (context) => ReporteGanado(),
+                    ),
+                  );
+                },
+              ),
+              CustomGridItem(
+                imageAsset: 'assets/imagen/man-icon.png',
+                text: 'Modulo Ganado',
+                onTapCallback: () {
+                  // Navegar a MainGanado cuando se toca Button 1
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReporteGanado(),
+                    ),
+                  );
+                },
+              ),
+              CustomGridItem(
+                imageAsset: 'assets/imagen/man-icon.png',
+                text: 'Modulo Ganado',
+                onTapCallback: () {
+                  // Navegar a MainGanado cuando se toca Button 1
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReporteGanado(),
                     ),
                   );
                 },
               ),
 
-              CustomGridItem(
-                imageAsset: 'assets/imagen/man-icon.png',
-                text: 'Empresa',
-                onTapCallback: () {
-                  // Navegar a MainRaza cuando se toca Button 2
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MainEmpresa(),
-                    ),
-                  );
-                },
-              ),
+
               // Agrega más CustomGridItem según sea necesario
             ],
           ),
@@ -117,6 +134,8 @@ class CustomGridItem extends StatelessWidget {
     required this.text,
     required this.onTapCallback,
   });
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -157,5 +176,7 @@ class CustomGridItem extends StatelessWidget {
         ),
       ),
     );
+
+
   }
 }

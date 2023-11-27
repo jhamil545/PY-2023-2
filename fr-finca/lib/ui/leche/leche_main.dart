@@ -1,49 +1,49 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, library_private_types_in_public_api
 import 'package:animated_floating_buttons/animated_floating_buttons.dart';
-import 'package:asistencia_app/bloc/finca/finca_bloc.dart';
-import 'package:asistencia_app/repository/FincaRepository.dart';
+import 'package:asistencia_app/bloc/leche/leche_bloc.dart';
+import 'package:asistencia_app/repository/LecheRepository.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';
 
 import 'package:asistencia_app/comp/TabItem.dart';
-import 'package:asistencia_app/ui/finca/MyAppState.dart';
-import 'package:asistencia_app/ui/finca/finca_edit.dart';
-import 'package:asistencia_app/ui/finca/finca_form.dart';
+import 'package:asistencia_app/ui/leche/MyAppState.dart';
+import 'package:asistencia_app/ui/leche/leche_edit.dart';
+import 'package:asistencia_app/ui/leche/leche_form.dart';
 import 'package:flutter/material.dart';
-import 'package:asistencia_app/modelo/FincaModelo.dart';
+import 'package:asistencia_app/modelo/LecheModelo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 
 import '../help_screen.dart';
 
-class MainFinca extends StatelessWidget {
-  const MainFinca({super.key});
+class MainLeche extends StatelessWidget {
+  const MainLeche({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => FincaBloc(FincaRepository())),
+        BlocProvider(create: (_) => LecheBloc(LecheRepository())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: AppTheme.useLightMode ? ThemeMode.light : ThemeMode.dark,
         theme: AppTheme.themeDataLight,
         darkTheme: AppTheme.themeDataDark,
-        home: const FincaUI(),
+        home: const LecheUI(),
       ),
     );
   }
 }
 
-class FincaUI extends StatefulWidget {
-  const FincaUI({super.key});
+class LecheUI extends StatefulWidget {
+  const LecheUI({super.key});
 
   @override
-  _FincaUIState createState() => _FincaUIState();
+  _LecheUIState createState() => _LecheUIState();
 }
 
-class _FincaUIState extends State<FincaUI> {
+class _LecheUIState extends State<LecheUI> {
   //ApiCovid apiService;
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   var api;
@@ -52,7 +52,7 @@ class _FincaUIState extends State<FincaUI> {
     super.initState();
     //apiService = ApiCovid();
     //api=Provider.of<PredictionApi>(context, listen: false).getPrediction();
-    BlocProvider.of<FincaBloc>(context).add(ListarFincaEvent());
+    BlocProvider.of<LecheBloc>(context).add(ListarLecheEvent());
     print("entro aqui");
   }
 
@@ -90,7 +90,7 @@ class _FincaUIState extends State<FincaUI> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Lista de Finca Bloc',
+            'Lista de Leche Bloc',
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -98,6 +98,7 @@ class _FincaUIState extends State<FincaUI> {
               Navigator.pop(context);
             },
           ),
+
           automaticallyImplyLeading: false,
           centerTitle: true,
           actions: <Widget>[
@@ -123,7 +124,7 @@ class _FincaUIState extends State<FincaUI> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const FincaForm()),
+                        builder: (context) => const LecheForm()),
                   ).then(onGoBack);
                 },
                 child: const Icon(Icons.add_box_sharp),
@@ -132,10 +133,10 @@ class _FincaUIState extends State<FincaUI> {
           ],
         ),
         backgroundColor: AppTheme.nearlyWhite,
-        body: BlocBuilder<FincaBloc, FincaState>(
+        body: BlocBuilder<LecheBloc, LecheState>(
           builder: (context, state) {
-            if (state is FincaLoadedState) {
-              return _buildListView(context, state.fincaList);
+            if (state is LecheLoadedState) {
+              return _buildListView(context, state.lecheList);
             } else {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -159,12 +160,12 @@ class _FincaUIState extends State<FincaUI> {
     );
   }
 
-  Widget _buildListView(BuildContext context, List<FincaxModelo> finca) {
+  Widget _buildListView(BuildContext context, List<LechexModelo> leche) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          FincaxModelo fincax = finca[index];
+          LechexModelo lechex = leche[index];
           return Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Card(
@@ -177,7 +178,7 @@ class _FincaUIState extends State<FincaUI> {
                     ListTile(
                         title: Row(
                           children: [
-                            Text(fincax.nombre,
+                            Text(lechex.cantidadLt,
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
@@ -208,7 +209,7 @@ class _FincaUIState extends State<FincaUI> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       CompanyFormEdit(
-                                                          modelA: fincax )),
+                                                          modelA: lechex )),
                                             ).then(onGoBack);
                                           })),
                                   Expanded(
@@ -251,12 +252,12 @@ class _FincaUIState extends State<FincaUI> {
                                                 }).then((value) {
                                               if (value.toString() ==
                                                   "Success") {
-                                                print("dfdfdf: ${fincax.id}");
+                                                print("dfdfdf: ${lechex.id}");
 
-                                                BlocProvider.of<FincaBloc>(
+                                                BlocProvider.of<LecheBloc>(
                                                     context)
-                                                    .add(DeleteFincaEvent(
-                                                    fincax.id ));
+                                                    .add(DeleteLecheEvent(
+                                                    lechex.id ));
 
 
                                               }
@@ -278,7 +279,7 @@ class _FincaUIState extends State<FincaUI> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => MyAppQR(
-                                                modelA: fincax,
+                                                modelA: lechex,
                                               )),
                                         ).then(onGoBack);
                                         */
@@ -305,7 +306,7 @@ class _FincaUIState extends State<FincaUI> {
             ),
           );
         },
-        itemCount: finca.length,
+        itemCount: leche.length,
       ),
     );
   }

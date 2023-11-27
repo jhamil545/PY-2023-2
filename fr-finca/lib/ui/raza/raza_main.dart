@@ -108,6 +108,12 @@ class _RazaUIState extends State<RazaUI> {
           title: Text(
             'Lista de Razas Bloc',
           ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           automaticallyImplyLeading: false,
           centerTitle: true,
           actions: <Widget>[

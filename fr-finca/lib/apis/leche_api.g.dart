@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'raza_api.dart';
+part of 'leche_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'raza_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RazaApi implements RazaApi {
-  _RazaApi(
+class _LecheApi implements LecheApi {
+  _LecheApi(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,61 +21,61 @@ class _RazaApi implements RazaApi {
   String? baseUrl;
 
   @override
-  Future<List<RazaModelo>> getRaza(String token) async {
+  Future<List<LechexModelo>> getLeche(String token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<RazaModelo>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<LechexModelo>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/raza/list',
+              '/finca/leche/list',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => RazaModelo.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => LechexModelo.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<RazaModelo> crearRaza(
+  Future<LechexModelo> createLeche(
     String token,
-    RazaModelo raza,
+    LecheModelo leche,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(raza.toJson());
+    _data.addAll(leche.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RazaModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<LechexModelo>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/raza/crear',
+              '/finca/leche/crear',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RazaModelo.fromJson(_result.data!);
+    final value = LechexModelo.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<RazaModelo> findRaza(
+  Future<LecheModelo> findLeche(
     String token,
     int id,
   ) async {
@@ -85,24 +85,24 @@ class _RazaApi implements RazaApi {
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RazaModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<LecheModelo>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/raza/buscar/${id}',
+              '/finca/leche/buscar/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RazaModelo.fromJson(_result.data!);
+    final value = LecheModelo.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<GenericModelo> deleteRaza(
+  Future<GenericModelo> deleteLeche(
     String token,
     int id,
   ) async {
@@ -119,7 +119,7 @@ class _RazaApi implements RazaApi {
     )
             .compose(
               _dio.options,
-              '/finca/raza/eliminar/${id}',
+              '/finca/leche/eliminar/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -129,31 +129,31 @@ class _RazaApi implements RazaApi {
   }
 
   @override
-  Future<RazaModelo> updateRaza(
+  Future<LechexModelo> updateLeche(
     String token,
     int id,
-    RazaModelo raza,
+    LecheModelo leche,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(raza.toJson());
+    _data.addAll(leche.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RazaModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<LechexModelo>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/raza/editar/${id}',
+              '/finca/leche/editar/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RazaModelo.fromJson(_result.data!);
+    final value = LechexModelo.fromJson(_result.data!);
     return value;
   }
 

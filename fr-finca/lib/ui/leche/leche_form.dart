@@ -1,34 +1,35 @@
-import 'package:asistencia_app/bloc/finca/finca_bloc.dart';
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:asistencia_app/bloc/leche/leche_bloc.dart';
 import 'package:asistencia_app/comp/DropDownFormField.dart';
-import 'package:asistencia_app/modelo/FincaModelo.dart';
+import 'package:asistencia_app/modelo/LecheModelo.dart';
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
-class CompanyFormEdit extends StatefulWidget {
-  FincaxModelo modelA;
-
-  CompanyFormEdit({super.key, required this.modelA});
+class LecheForm extends StatefulWidget {
+  const LecheForm({super.key});
 
   @override
-  FincaFormEditState createState() => FincaFormEditState(modelA: modelA);
+  _LecheFormState createState() => _LecheFormState();
 }
 
-class FincaFormEditState extends State<CompanyFormEdit> {
-  FincaxModelo modelA;
-  FincaFormEditState({required this.modelA}) : super();
-
-  late String nombre = "";
-  late String nomCort = "";
-  late String direccion = "";
-  late String descripcion = "";
-  late String ubigeo = "";
-  late String ttalHectareas = "";
-  late int empresaId=0;
-
+class _LecheFormState extends State<LecheForm> {
+  late String fecha = "";
+  late String cantidadLt = "";
+  late String turno = "";
+  late int ganadoId = 0;
+  List<Map<String, String>> horario = [
+    {'value': 'AM', 'display': 'Mañana'},
+    {'value': 'PM', 'display': 'Tarde'}
+  ];
   @override
+
   void initState() {
     super.initState();
+    print("ver: ${horario.map((item) => item['value']).toList()}");
+    print("verv: ${horario.map((item) => item['display']).toList()}");
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -37,31 +38,24 @@ class FincaFormEditState extends State<CompanyFormEdit> {
     isMultipleSelection: true,
   );
 
-  void capturaNombre(valor) {
-    nombre = valor;
+
+  TextEditingController _fechanac = new TextEditingController();
+  DateTime? selectedDate;
+  void capturaFecha(valor) {
+    fecha = valor;
   }
 
-  void capturaNomCort(valor) {
-    nomCort = valor;
+  void capturaCantidadLt(valor) {
+    cantidadLt = valor;
   }
 
-  void capturaDireccion(valor) {
-    direccion = valor;
+  void capturaTurno(valor) {
+    turno = valor;
   }
 
-  void capturaDescripcion(valor) {
-    descripcion = valor;
-  }
 
-  void capturaUbigeo(valor) {
-    ubigeo = valor;
-  }
-  void capturaTtalHectareas(valor) {
-    ttalHectareas = valor;
-  }
-
-  void capturaEmpresa(valor) {
-    empresaId = valor;
+  void capturaGanado(valor) {
+    ganadoId = valor;
   }
 
   @override
@@ -69,7 +63,7 @@ class FincaFormEditState extends State<CompanyFormEdit> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Form. Reg. Finca B"),
+        title: const Text("Form. Reg. Leche B"),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -82,16 +76,11 @@ class FincaFormEditState extends State<CompanyFormEdit> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    _buildDatoCadena(
-                        capturaNombre, modelA.nombre, "Nombre :"),
-                    _buildDatoCadena(capturaNomCort, modelA.nomCort,
-                        "nomCort :"),
-                    _buildDatoCadena(
-                        capturaDireccion, modelA.direccion, "direccion:"),
-                    _buildDatoCadena(capturaDescripcion, modelA.descripcion, "descripcion:"),
-                    _buildDatoCadena(capturaUbigeo, modelA.ubigeo, "ubigeo:"),
-                    _buildDatoCadena(capturaTtalHectareas, modelA.ttalHectareas, "ttalHectareas:"),
-                    //_buildDatoCadena(capturaEmpresa, modelA.empresaId as String, "empresaId:"),
+
+                    _buildDatoCadena(capturaFecha,"fechanac:"),
+                    _buildDatoCadena(capturaCantidadLt,  "cantidadLt:"),
+                    _buildDatoLista(capturaTurno,turno, "turno:", horario),
+                    _buildDatoCadena(capturaGanado,  "ganado:"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(
@@ -111,29 +100,15 @@ class FincaFormEditState extends State<CompanyFormEdit> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                FincaModelo mp = FincaModelo.unlaunched();
-                                mp.nombre = nombre;
-                                mp.nomCort = nomCort;
-                                mp.direccion = direccion;
-                                mp.descripcion = descripcion;
-                                mp.ubigeo = ubigeo;
-                                mp.ttalHectareas = ttalHectareas;
-                                mp.empresaId= modelA.empresaId.id;
-                                mp.id = modelA.id;
+                                LecheModelo mp = LecheModelo.unlaunched();
 
-                                /*var api = await Provider.of<FincaApi>(
-                                    context,
-                                    listen: false)
-                                    .updateFinca(TokenUtil.TOKEN,modelA.id.toInt(), mp);
-                                print("ver: ${api.toJson()}");
-                                if (api.toJson()!=null) {
-                                  Navigator.pop(context, () {
-                                    setState(() {});
-                                  });
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationHomeScreen()));
-                                }*/
-                                BlocProvider.of<FincaBloc>(context)
-                                    .add(UpdateFincaEvent(mp));
+                                mp.fecha = DateFormat('yyyy-MM-dd').format(DateTime.parse(_fechanac.value.text));
+                                mp.cantidadLt = cantidadLt;
+                                mp.turno = turno;
+                                mp.ganadoId = ganadoId;
+
+                                BlocProvider.of<LecheBloc>(context)
+                                    .add(CreateLecheEvent(mp));
                                 Navigator.pop(context, () {
                                   //setState(() {});
                                 });
@@ -157,10 +132,9 @@ class FincaFormEditState extends State<CompanyFormEdit> {
     );
   }
 
-  Widget _buildDatoEntero(Function obtValor, String dato, String label) {
+  Widget _buildDatoEntero(Function obtValor, String label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
-      initialValue: dato,
       keyboardType: TextInputType.number,
       validator: (String? value) {
         if (value!.isEmpty) {
@@ -174,10 +148,9 @@ class FincaFormEditState extends State<CompanyFormEdit> {
     );
   }
 
-  Widget _buildDatoCadena(Function obtValor, String dato, String label) {
+  Widget _buildDatoCadena(Function obtValor, String label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
-      initialValue: dato,
       keyboardType: TextInputType.text,
       validator: (String? value) {
         if (value!.isEmpty) {
@@ -191,12 +164,26 @@ class FincaFormEditState extends State<CompanyFormEdit> {
     );
   }
 
-  Widget buildDatoLista(
-      Function obtValor, dato, String label, List<dynamic> listaDato) {
+  Future<void> _selectDate(BuildContext context, Function obtValor) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2030),
+    );
+    if (pickedDate != null && pickedDate != selectedDate) {
+      setState(() {
+        selectedDate = pickedDate;
+        obtValor(selectedDate.toString());
+      });
+    }
+  }
+
+  Widget _buildDatoLista(Function obtValor,_dato, String label, List<dynamic> listaDato) {
     return DropDownFormField(
       titleText: label,
       hintText: 'Seleccione',
-      value: dato,
+      value: _dato,
       onSaved: (value) {
         setState(() {
           obtValor(value);
@@ -212,4 +199,25 @@ class FincaFormEditState extends State<CompanyFormEdit> {
       valueField: 'value',
     );
   }
+
+  Widget _buildDatoFecha(Function obtValor, String label) {
+    return TextFormField(
+      decoration: InputDecoration(labelText: label),
+      controller: _fechanac,
+      keyboardType: TextInputType.datetime,
+      validator: (String? value) {
+        if (value!.isEmpty) {
+          return 'Nombre Requerido!';
+        }
+        return null;
+      },
+      onTap: (){
+        _selectDate(context,obtValor);
+      },
+      onSaved: (String? value) {
+        obtValor(value!);
+      },
+    );
+  }
+
 }

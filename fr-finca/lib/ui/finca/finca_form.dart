@@ -120,7 +120,7 @@ class _FincaFormState extends State<FincaForm> {
                                 mp.descripcion = descripcion;
                                 mp.ubigeo = ubigeo;
                                 mp.ttalHectareas = ttalHectareas;
-                                mp.ganadoId = empresaId;
+                                mp.empresaId = empresaId;
 
                                 BlocProvider.of<FincaBloc>(context)
                                     .add(CreateFincaEvent(mp));

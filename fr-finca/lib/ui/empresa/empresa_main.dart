@@ -108,6 +108,12 @@ class _EmpresaUIState extends State<EmpresaUI> {
           title: Text(
             'Lista de Empresas Bloc',
           ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           automaticallyImplyLeading: false,
           centerTitle: true,
           actions: <Widget>[

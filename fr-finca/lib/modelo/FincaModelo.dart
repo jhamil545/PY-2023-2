@@ -15,7 +15,7 @@ class FincaModelo {
   late final String descripcion;
   late final String ubigeo;
   late final String ttalHectareas;
-  late final int ganadoId;
+  late final int empresaId;
 
   FincaModelo({
     required this.id,
@@ -25,7 +25,7 @@ class FincaModelo {
     required this.descripcion,
     required this.ubigeo,
     required this.ttalHectareas,
-    required this.ganadoId,
+    required this.empresaId,
   });
   FincaModelo.unlaunched();
 
@@ -37,7 +37,7 @@ class FincaModelo {
     descripcion = json['descripcion'];
     ubigeo = json['ubigeo'];
     ttalHectareas = json['ttalHectareas'];
-    ganadoId = json['ganadoId'];
+    empresaId = json['empresaId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -49,7 +49,7 @@ class FincaModelo {
     _data['descripcion'] = descripcion;
     _data['ubigeo'] = ubigeo;
     _data['ttalHectareas'] = ttalHectareas;
-    _data['ganadoId'] = ganadoId;
+    _data['empresaId'] = empresaId;
 
     return _data;
   }

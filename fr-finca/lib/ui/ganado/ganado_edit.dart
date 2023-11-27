@@ -95,7 +95,7 @@ class GanadoFormEditState extends State<CompanyFormEdit> {
                         capturaArete, modelA.arete, "Nombre arete:"),
                     _buildDatoCadena(capturaNombre, modelA.nombre,
                         "Nombre :"),
-                    _buildDatoCadena(capturaFechanac,modelA.arete,"fechanac:"),
+                    _buildDatoCadena(capturaFechanac,modelA.fechaNac,"fechanac:"),
                     _buildDatoCadena(capturaFoto_url, modelA.fotoUrl, "foto_url:"),
                     _buildDatoLista(capturaGenero, modelA.genero, "genero:", generos),
                     //_buildDatoCadena(capturaRaza, modelA.userId as String, "Usuario:"),
