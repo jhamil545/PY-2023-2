@@ -41,7 +41,7 @@ class ReporteDeLeche extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.pets), // Ícono para Raza
-              title: Text('Raza'),
+              title: Text('Leche'),
               onTap: () {
                 Navigator.push(
                   context,
