@@ -30,16 +30,14 @@ public class Leche {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
-
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Basic(optional = false)
     @Column(name = "fecha", nullable = false)
     @Temporal(TemporalType.DATE)
-    private LocalDate fecha;
+    private LocalDate fechaRec;
 
     @Column(name = "cantidadLt", nullable = false)
-    private Double cantidadLt;
+    private String cantidadLt;
 
     @Column(name = "turno", nullable = false)
     private String turno;

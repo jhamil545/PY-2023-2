@@ -190,116 +190,76 @@ class _LecheUIState extends State<LecheUI> {
                           AssetImage("assets/imagen/man-icon.png"),
                         ),
                         trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            //crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Expanded(
-                                      child: IconButton(
-                                          icon: const Icon(Icons.edit),
-                                          iconSize: 24,
-                                          padding: EdgeInsets.zero,
-                                          constraints: const BoxConstraints(),
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      CompanyFormEdit(
-                                                          modelA: lechex )),
-                                            ).then(onGoBack);
-                                          })),
-                                  Expanded(
-                                      child: IconButton(
-                                          icon: const Icon(Icons.delete),
-                                          iconSize: 24,
-                                          padding: EdgeInsets.zero,
-                                          constraints: const BoxConstraints(),
-                                          //color: AppTheme.themeData.colorScheme.inversePrimary,
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                barrierDismissible: true,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return AlertDialog(
-                                                    title: const Text(
-                                                        "Mensaje de confirmacion"),
-                                                    content: const Text(
-                                                        "Desea Eliminar?"),
-                                                    actions: [
-                                                      FloatingActionButton(
-                                                        child: const Text(
-                                                            'CANCEL'),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop('Failure');
-                                                        },
-                                                      ),
-                                                      FloatingActionButton(
-                                                          child: const Text(
-                                                              'ACCEPT'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                context)
-                                                                .pop('Success');
-                                                          })
-                                                    ],
-                                                  );
-                                                }).then((value) {
-                                              if (value.toString() ==
-                                                  "Success") {
-                                                print("dfdfdf: ${lechex.id}");
-
-                                                BlocProvider.of<LecheBloc>(
-                                                    context)
-                                                    .add(DeleteLecheEvent(
-                                                    lechex.id ));
-
-
-                                              }
-                                            });
-                                          }))
-                                ],
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: IconButton(
-                                      icon: const Icon(Icons.qr_code),
-                                      padding: EdgeInsets.zero,
-                                      constraints: const BoxConstraints(),
-                                      onPressed: () {
-                                        /*
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => MyAppQR(
-                                                modelA: lechex,
-                                              )),
-                                        ).then(onGoBack);
-                                        */
-                                      },
-                                    ),
-                                  ),
-                                  Expanded(child: Builder(
-                                    builder: (BuildContext context) {
-                                      return IconButton(
-                                        icon: const Icon(
-                                            Icons.send_and_archive_sharp),
-                                        padding: EdgeInsets.zero,
-                                        constraints: const BoxConstraints(),
-                                        onPressed: () async {},
-                                      );
+                          mainAxisSize: MainAxisSize.min,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Expanded(
+                                  child: IconButton(
+                                    icon: const Icon(Icons.edit),
+                                    iconSize: 24,
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CompanyFormEdit(modelA: lechex),
+                                        ),
+                                      ).then(onGoBack);
                                     },
-                                  ))
-                                ],
-                              )
-                            ])),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    iconSize: 24,
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: true,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text("Mensaje de confirmacion"),
+                                            content: const Text("Desea Eliminar?"),
+                                            actions: [
+                                              FloatingActionButton(
+                                                child: const Text('CANCEL'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop('Failure');
+                                                },
+                                              ),
+                                              FloatingActionButton(
+                                                child: const Text('ACCEPT'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop('Success');
+                                                },
+                                              )
+                                            ],
+                                          );
+                                        },
+                                      ).then((value) {
+                                        if (value.toString() == "Success") {
+                                          print("dfdfdf: ${lechex.id}");
+
+                                          BlocProvider.of<LecheBloc>(context).add(
+                                            DeleteLecheEvent(lechex.id),
+                                          );
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                    ),
                   ],
                 ),
               ),

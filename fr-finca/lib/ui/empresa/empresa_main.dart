@@ -228,150 +228,77 @@ class _EmpresaUIState extends State<EmpresaUI> {
                               AssetImage("assets/imagen/man-icon.png"),
                         ),
                         trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            //crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Container(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Expanded(
-                                        child: IconButton(
-                                            icon: Icon(Icons.edit),
-                                            iconSize: 24,
-                                            padding: EdgeInsets.zero,
-                                            constraints: BoxConstraints(),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EmpresaFormEdit(
-                                                            modelA: personax)),
-                                              ).then(onGoBack);
-                                            })),
-                                    Expanded(
-                                        child: IconButton(
-                                            icon: Icon(Icons.delete),
-                                            iconSize: 24,
-                                            padding: EdgeInsets.zero,
-                                            constraints: BoxConstraints(),
-                                            //color: AppTheme.themeData.colorScheme.inversePrimary,
-                                            onPressed: () {
-                                              showDialog(
-                                                  context: context,
-                                                  barrierDismissible: true,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          "Mensaje de confirmacion"),
-                                                      content: Text(
-                                                          "Desea Eliminar?"),
-                                                      actions: [
-                                                        FloatingActionButton(
-                                                          child: const Text(
-                                                              'CANCEL'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop('Failure');
-                                                          },
-                                                        ),
-                                                        FloatingActionButton(
-                                                            child: const Text(
-                                                                'ACCEPT'),
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop(
-                                                                      'Success');
-                                                            })
-                                                      ],
-                                                    );
-                                                  }).then((value) {
-                                                if (value.toString() ==
-                                                    "Success") {
-                                                  print(personax.id);
-                                                  /*Provider.of<EmpresaApi>(context,
-                                                  listen: false)
-                                                  .deleteEmpresa(TokenUtil.TOKEN,personax.id)
-                                                  .then((value) => onGoBack(value));*/
-                                                  //var onGoBack = onGoBack;
-                                                  BlocProvider.of<EmpresaBloc>(
-                                                          context)
-                                                      .add(DeleteEmpresaEvent(
-                                                          personax));
-                                                }
-                                              });
-                                            }))
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: IconButton(
-                                        icon: Icon(Icons.qr_code),
-                                        padding: EdgeInsets.zero,
-                                        constraints: BoxConstraints(),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => MyAppQR(
-                                                      modelA: personax,
-                                                    )),
-                                          ).then(onGoBack);
-                                        },
-                                      ),
-                                    ),
-                                    Expanded(child: Builder(
-                                      builder: (BuildContext context) {
-                                        return IconButton(
-                                          icon: Icon(
-                                              Icons.send_and_archive_sharp),
-                                          padding: EdgeInsets.zero,
-                                          constraints: BoxConstraints(),
-                                          onPressed: () async {
-                                            /*RespAsistenciapaModelo api=await Provider.of<AsistenciapaApi>(context, listen: false).getAsistenciapa(TokenUtil.TOKEN);
-                                            exportAsistenciaToExcel(api.data);
-                                            await Future.delayed(const Duration(seconds: 1));
-                                            print("OJO:${imagePaths.isEmpty}");
-                                            text="Exportando Asistencias";
-                                            if(!text.isEmpty && !imagePaths.isEmpty){
-                                              _onShare(context);
-                                              Fluttertoast.showToast(
-                                                  msg: "Exporto correctamente",
-                                                  toastLength: Toast.LENGTH_LONG,
-                                                  gravity: ToastGravity.CENTER,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor: Colors.blue,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0
-                                              );
-                                            }else{
-                                              Fluttertoast.showToast(
-                                                  msg: "Error Al compartir",
-                                                  toastLength: Toast.LENGTH_LONG,
-                                                  gravity: ToastGravity.CENTER,
-                                                  timeInSecForIosWeb: 1,
-                                                  backgroundColor: Colors.blue,
-                                                  textColor: Colors.white,
-                                                  fontSize: 16.0
-                                              );
-                                            }*/
-                                          },
-                                        );
+                          mainAxisSize: MainAxisSize.min,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Container(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: IconButton(
+                                      icon: Icon(Icons.edit),
+                                      iconSize: 24,
+                                      padding: EdgeInsets.zero,
+                                      constraints: BoxConstraints(),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => EmpresaFormEdit(modelA: personax),
+                                          ),
+                                        ).then(onGoBack);
                                       },
-                                    ))
-                                  ],
-                                ),
-                              )
-                            ])),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: IconButton(
+                                      icon: Icon(Icons.delete),
+                                      iconSize: 24,
+                                      padding: EdgeInsets.zero,
+                                      constraints: BoxConstraints(),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible: true,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text("Mensaje de confirmacion"),
+                                              content: Text("Desea Eliminar?"),
+                                              actions: [
+                                                FloatingActionButton(
+                                                  child: const Text('CANCEL'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop('Failure');
+                                                  },
+                                                ),
+                                                FloatingActionButton(
+                                                  child: const Text('ACCEPT'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop('Success');
+                                                  },
+                                                )
+                                              ],
+                                            );
+                                          },
+                                        ).then((value) {
+                                          if (value.toString() == "Success") {
+                                            print(personax.id);
+                                            BlocProvider.of<EmpresaBloc>(context).add(
+                                              DeleteEmpresaEvent(personax),
+                                            );
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                    ),
                   ],
                 ),
               ),

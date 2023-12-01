@@ -1,6 +1,7 @@
 import 'package:asistencia_app/theme/AppTheme.dart';
 import 'package:asistencia_app/drawer/drawer_user_controller.dart';
 import 'package:asistencia_app/drawer/home_drawer.dart';
+import 'package:asistencia_app/ui/especie/especie_main.dart';
 import 'package:asistencia_app/ui/ganado/ganado_main.dart';
 
 import 'package:asistencia_app/ui/help_screen.dart';
@@ -63,6 +64,15 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
       } else if (drawerIndex == DrawerIndex.About) {
         setState(() {
           screenView = MainGanado();
+        });
+      }
+      else if (drawerIndex == DrawerIndex.FeedBack) {
+        setState(() {
+          screenView = MainEspecie();
+        });
+      }else if (drawerIndex == DrawerIndex.About) {
+        setState(() {
+          screenView = MainRaza();
         });
       }else {
         //do in your way......

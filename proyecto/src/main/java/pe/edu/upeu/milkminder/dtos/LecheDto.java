@@ -17,12 +17,12 @@ import pe.edu.upeu.milkminder.models.Ganado;
 public class LecheDto {
   Long id;   
   @JsonFormat(pattern = "yyyy-MM-dd")
-  LocalDate fecha; 
-  Double cantidadLt; 
+  LocalDate fechaRec; 
+  String cantidadLt; 
   String turno;
   @JsonIgnoreProperties({"leche"})
   Ganado ganadoId; 
   
-  public record LecheCrearDto(Long id,LocalDate fecha,
-        Double cantidadLt,String turno,  Long ganadoId){}
+  public record LecheCrearDto(Long id,LocalDate fechaRec,
+  String cantidadLt,String turno,  Long ganadoId){}
 }

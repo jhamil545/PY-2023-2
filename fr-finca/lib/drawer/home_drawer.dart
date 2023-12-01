@@ -45,6 +45,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
         labelName: 'Información',
         icon: Icon(Icons.info),
       ),
+      DrawerList(
+        index: DrawerIndex.FeedBack,
+        labelName: 'especie',
+        icon: Icon(Icons.info),
+      ),
     ];
   }
 

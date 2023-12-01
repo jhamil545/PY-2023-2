@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyASqEy-sB3JzG8Nbv_xdHHEiaRgmFMp-1k',
-    appId: '1:400306804266:web:f942977fc4fa47b31a1553',
-    messagingSenderId: '400306804266',
-    projectId: 'loginmovil-5260e',
-    authDomain: 'loginmovil-5260e.firebaseapp.com',
-    storageBucket: 'loginmovil-5260e.appspot.com',
-    measurementId: 'G-0YQ6J3HQ76',
+    apiKey: 'AIzaSyCYEmgtSPBlMj7HtmDl03VOM3uwLjGHgO0',
+    appId: '1:975826656717:web:0a3fa29e69cfe79ce23884',
+    messagingSenderId: '975826656717',
+    projectId: 'finca-34db9',
+    authDomain: 'finca-34db9.firebaseapp.com',
+    storageBucket: 'finca-34db9.appspot.com',
+    measurementId: 'G-79CV3C846J',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAeAe2scczlwQPvIdHthsWZs7BBFv7ai7U',
-    appId: '1:400306804266:android:89fab74626bd58f71a1553',
-    messagingSenderId: '400306804266',
-    projectId: 'loginmovil-5260e',
-    storageBucket: 'loginmovil-5260e.appspot.com',
+    apiKey: 'AIzaSyAhfZ1bNigLNHC7fY2waHFfNOCCMgNKOoc',
+    appId: '1:975826656717:android:0f1969b4e9a9cdbae23884',
+    messagingSenderId: '975826656717',
+    projectId: 'finca-34db9',
+    storageBucket: 'finca-34db9.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBZBXF7y1koW1ek1tFAKQieKcVQQYvSAoI',
-    appId: '1:400306804266:ios:889cfa25d89755de1a1553',
-    messagingSenderId: '400306804266',
-    projectId: 'loginmovil-5260e',
-    storageBucket: 'loginmovil-5260e.appspot.com',
+    apiKey: 'AIzaSyB88-cWgfp4EDaO8Agx4M9T25bdjayVHEU',
+    appId: '1:975826656717:ios:52775cb787158c93e23884',
+    messagingSenderId: '975826656717',
+    projectId: 'finca-34db9',
+    storageBucket: 'finca-34db9.appspot.com',
     iosBundleId: 'pe.edu.upeu.asistenciaApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBZBXF7y1koW1ek1tFAKQieKcVQQYvSAoI',
-    appId: '1:400306804266:ios:6f04f7261dc3cdf41a1553',
-    messagingSenderId: '400306804266',
-    projectId: 'loginmovil-5260e',
-    storageBucket: 'loginmovil-5260e.appspot.com',
+    apiKey: 'AIzaSyB88-cWgfp4EDaO8Agx4M9T25bdjayVHEU',
+    appId: '1:975826656717:ios:9e2ed1f1e562b0eee23884',
+    messagingSenderId: '975826656717',
+    projectId: 'finca-34db9',
+    storageBucket: 'finca-34db9.appspot.com',
     iosBundleId: 'pe.edu.upeu.asistenciaApp.RunnerTests',
   );
 }

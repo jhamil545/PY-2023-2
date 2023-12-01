@@ -75,18 +75,7 @@ class ReporteDeLeche extends StatelessWidget {
                 );
               },
             ),
-            ListTile(
-              leading: Icon(Icons.business), // Ícono para Empresa
-              title: Text('Empresa'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MainEmpresa(),
-                  ),
-                );
-              },
-            ),
+
             // Puedes agregar más ListTile con diferentes íconos según sea necesario
           ],
         ),

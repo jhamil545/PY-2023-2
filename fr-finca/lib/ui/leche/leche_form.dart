@@ -16,13 +16,13 @@ class LecheForm extends StatefulWidget {
 }
 
 class _LecheFormState extends State<LecheForm> {
-  late String fecha = "";
+  late String fechaRec = "";
   late String cantidadLt = "";
   late String turno = "";
-  late int ganadoId = 0;
+  late int ganadoId;
   List<Map<String, String>> horario = [
-    {'value': 'AM', 'display': 'Mañana'},
-    {'value': 'PM', 'display': 'Tarde'}
+    {'value': 'Manana', 'display': 'Am'},
+  {'value': 'Tarde', 'display': 'Pm'}
   ];
   @override
 
@@ -39,10 +39,10 @@ class _LecheFormState extends State<LecheForm> {
   );
 
 
-  TextEditingController _fechanac = new TextEditingController();
+  TextEditingController _fechaRec = new TextEditingController();
   DateTime? selectedDate;
-  void capturaFecha(valor) {
-    fecha = valor;
+  void capturaFechaRec(valor) {
+    _fechaRec.text = valor;
   }
 
   void capturaCantidadLt(valor) {
@@ -55,7 +55,7 @@ class _LecheFormState extends State<LecheForm> {
 
 
   void capturaGanado(valor) {
-    ganadoId = valor;
+    ganadoId = int.parse(valor);
   }
 
   @override
@@ -77,7 +77,7 @@ class _LecheFormState extends State<LecheForm> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
 
-                    _buildDatoCadena(capturaFecha,"fechanac:"),
+                    _buildDatoFecha(capturaFechaRec,"fechaRec:"),
                     _buildDatoCadena(capturaCantidadLt,  "cantidadLt:"),
                     _buildDatoLista(capturaTurno,turno, "turno:", horario),
                     _buildDatoCadena(capturaGanado,  "ganado:"),
@@ -102,7 +102,7 @@ class _LecheFormState extends State<LecheForm> {
                                 _formKey.currentState!.save();
                                 LecheModelo mp = LecheModelo.unlaunched();
 
-                                mp.fecha = DateFormat('yyyy-MM-dd').format(DateTime.parse(_fechanac.value.text));
+                                mp.fechaRec = DateFormat('yyyy-MM-dd').format(DateTime.parse(_fechaRec.value.text));
                                 mp.cantidadLt = cantidadLt;
                                 mp.turno = turno;
                                 mp.ganadoId = ganadoId;
@@ -203,7 +203,7 @@ class _LecheFormState extends State<LecheForm> {
   Widget _buildDatoFecha(Function obtValor, String label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
-      controller: _fechanac,
+      controller: _fechaRec,
       keyboardType: TextInputType.datetime,
       validator: (String? value) {
         if (value!.isEmpty) {

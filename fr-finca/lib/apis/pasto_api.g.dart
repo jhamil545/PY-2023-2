@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'especie_api.dart';
+part of 'pasto_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'especie_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _EspecieApi implements EspecieApi {
-  _EspecieApi(
+class _PastoApi implements PastoApi {
+  _PastoApi(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,61 +21,61 @@ class _EspecieApi implements EspecieApi {
   String? baseUrl;
 
   @override
-  Future<List<EspecieModelo>> getEspecie(String token) async {
+  Future<List<PastoModelo>> getPasto(String token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<EspecieModelo>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<PastoModelo>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/especie/list',
+              '/finca/Pasto/list',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => EspecieModelo.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => PastoModelo.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<EspecieModelo> crearEspecie(
+  Future<PastoModelo> crearPasto(
     String token,
-    EspecieModelo especie,
+    PastoModelo pasto,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(especie.toJson());
+    _data.addAll(pasto.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<EspecieModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<PastoModelo>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/especie/crear',
+              '/finca/Pasto/crear',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EspecieModelo.fromJson(_result.data!);
+    final value = PastoModelo.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<EspecieModelo> findEspecie(
+  Future<PastoModelo> findPasto(
     String token,
     int id,
   ) async {
@@ -85,24 +85,24 @@ class _EspecieApi implements EspecieApi {
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<EspecieModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<PastoModelo>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/especie/buscar/${id}',
+              '/finca/Pasto/buscar/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EspecieModelo.fromJson(_result.data!);
+    final value = PastoModelo.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<GenericModelo> deleteEspecie(
+  Future<GenericModelo> deletePasto(
     String token,
     int id,
   ) async {
@@ -119,7 +119,7 @@ class _EspecieApi implements EspecieApi {
     )
             .compose(
               _dio.options,
-              '/finca/especie/eliminar/${id}',
+              '/finca/Pasto/eliminar/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -129,31 +129,31 @@ class _EspecieApi implements EspecieApi {
   }
 
   @override
-  Future<EspecieModelo> updateEspecie(
+  Future<PastoModelo> updatePasto(
     String token,
     int id,
-    EspecieModelo especie,
+    PastoModelo pasto,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(especie.toJson());
+    _data.addAll(pasto.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<EspecieModelo>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<PastoModelo>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/finca/especie/editar/${id}',
+              '/finca/Pasto/editar/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EspecieModelo.fromJson(_result.data!);
+    final value = PastoModelo.fromJson(_result.data!);
     return value;
   }
 

@@ -18,13 +18,13 @@ class LecheFormEditState extends State<CompanyFormEdit> {
   LechexModelo modelA;
   LecheFormEditState({required this.modelA}) : super();
 
-  late String fecha = "";
+  late String fechaRec = "";
   late String cantidadLt = "";
   late String turno = "";
   late int ganadoId = 0;
   List<Map<String, String>> horario = [
-    {'value': 'AM', 'display': 'Mañana'},
-    {'value': 'PM', 'display': 'Tarde'}
+    {'value': 'Manana', 'display': 'Am'},
+    {'value': 'Tarde', 'display': 'Pm'}
   ];
 
   @override
@@ -40,11 +40,11 @@ class LecheFormEditState extends State<CompanyFormEdit> {
     isMultipleSelection: true,
   );
 
-  TextEditingController _fecha = new TextEditingController();
+  TextEditingController _fechaRec = new TextEditingController();
   DateTime? selectedDate;
 
   void capturaFecha(valor) {
-    fecha = valor;
+    fechaRec = valor;
   }
 
   void capturaCantidadLt(valor) {
@@ -79,9 +79,9 @@ class LecheFormEditState extends State<CompanyFormEdit> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
 
-                    _buildDatoCadena(capturaFecha,modelA.fecha,"fechanac:"),
+                    _buildDatoCadena(capturaFecha,modelA.fechaRec,"fechaRec:"),
                     _buildDatoCadena(capturaCantidadLt, modelA.cantidadLt, "cantidadLt:"),
-                    _buildDatoLista(capturaTurno, modelA.turno, "turno:", horario),
+                    _buildDatoLista(capturaTurno, modelA.turno, "genero:", horario),
                     //_buildDatoCadena(capturaGanado, modelA.ganadoId as String, "ganado:"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -103,7 +103,7 @@ class LecheFormEditState extends State<CompanyFormEdit> {
                                 );
                                 _formKey.currentState!.save();
                                 LecheModelo mp = LecheModelo.unlaunched();
-                                mp.fecha = fecha;
+                                mp.fechaRec = fechaRec;
                                 mp.cantidadLt = cantidadLt;
                                 mp.turno = turno;
                                 mp.ganadoId= modelA.ganadoId.id;
@@ -216,7 +216,8 @@ class LecheFormEditState extends State<CompanyFormEdit> {
     }
   }
 
-  Widget _buildDatoLista(Function obtValor,_dato, String label, List<dynamic> listaDato) {
+  Widget _buildDatoLista(Function obtValor, _dato, String label, List<dynamic> listaDato) {
+    print('Valores iniciales - _dato: $_dato, listaDato: $listaDato');
     return DropDownFormField(
       titleText: label,
       hintText: 'Seleccione',
@@ -237,10 +238,11 @@ class LecheFormEditState extends State<CompanyFormEdit> {
     );
   }
 
+
   Widget _buildDatoFecha(Function obtValor, String label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
-      controller: _fecha,
+      controller: _fechaRec,
       keyboardType: TextInputType.datetime,
       validator: (String? value) {
         if (value!.isEmpty) {

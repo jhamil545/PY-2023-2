@@ -74,7 +74,8 @@ public class LecheServiceImp implements LecheService{
     public Leche update(LecheDto.LecheCrearDto entidad, Long id) {
         Leche entidadx = lecheRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Periodo not exist with id :" + id));
-        entidadx.setFecha(entidad.fecha());
+        
+        entidadx.setCantidadLt(entidad.cantidadLt());
         entidadx.setTurno(entidad.turno());
         return lecheRepository.save(entidadx);        
     }
